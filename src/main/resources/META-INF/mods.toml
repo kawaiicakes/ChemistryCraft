@@ -6,14 +6,14 @@ issueTrackerURL="https://github.com/kawaiicakes/Immersive-ChemistryCraft/issues"
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 
-modId="industrialchemcraft"
+modId="industrialchemistrycraft"
 version="${file.jarVersion}" 
 
 displayName="Industrial ChemistryCraft" 
 
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 
-logoFile="industrialchemcraft.png"
+logoFile="industrialchemistrycraft.png"
 credits="A heartfelt thanks to the AshleyCraft community, Vazkii, Arcana & Timbr of the Smashing Mods team, and all others who support me~ <3"
 authors="kawaiicakes"
 displayTest="MATCH_VERSION"
