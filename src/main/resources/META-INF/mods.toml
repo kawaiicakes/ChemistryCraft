@@ -3,9 +3,7 @@ loaderVersion="[43,)"
 license="MIT License"
 issueTrackerURL="https://github.com/kawaiicakes/Immersive-ChemistryCraft/issues"
 
-# A list of mods - how many allowed here is determined by the individual mod loader
-[[mods]] #mandatory
-
+[[mods]]
 modId="industrialchemistrycraft"
 version="${file.jarVersion}" 
 
@@ -23,15 +21,16 @@ This mod was written with compatibility with other mods as its base premise, bec
 There are various tweaks which may be configured according to your needs. It also features a module (disabled by default) completely revamping Minecraft's base mechanics! 
 '''
 
-# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-#[[dependencies.examplemod]] #optional
-    # the modid of the dependency
-#    modId="forge" #mandatory
-    # Does this dependency have to exist - if not, ordering below must be specified
-#    mandatory=true #mandatory
-    # The version range of the dependency
-#    versionRange="[43,)" #mandatory
-    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
-#    ordering="NONE"
-    # Side this dependency is applied on - BOTH, CLIENT or SERVER
-#    side="BOTH"
+[[dependencies.industrialchemistrycraft]]
+    modId="forge"
+    mandatory=true
+    versionRange="[43,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.industrialchemistrycraft]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19.2,)"
+    ordering="NONE"
+    side="BOTH"
