@@ -1,0 +1,37 @@
+modLoader="javafml"
+loaderVersion="[43,)"
+license="MIT License"
+issueTrackerURL="https://github.com/kawaiicakes/Immersive-ChemistryCraft/issues"
+
+# A list of mods - how many allowed here is determined by the individual mod loader
+[[mods]] #mandatory
+
+modId="industrialchemcraft"
+version="${file.jarVersion}" 
+
+displayName="Industrial ChemistryCraft" 
+
+#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+
+logoFile="industrialchemcraft.png"
+credits="A heartfelt thanks to the AshleyCraft community, Vazkii, Arcana & Timbr of the Smashing Mods team, and all others who support me~ <3"
+authors="kawaiicakes"
+displayTest="MATCH_VERSION"
+description='''
+Introducing realistic chemistry to Minecraft! Builds on the materials and compounds added by ChemLib, adding such things as metallurgy & forgery, oil and natural gas, ore/mineral extraction, temperature, chemical reactions, industrial chemistry, novel synthesis of items, molarity, interactions of items and blocks with the world, and much more!
+This mod was written with compatibility with other mods as its base premise, because who likes making rigid compromises when playing with other mods? It was made specifically for AshleyCraft - my personal modded SMP - seeking to give extensive utility to modpack makers looking to add flare to tech mods!
+There are various tweaks which may be configured according to your needs. It also features a module (disabled by default) completely revamping Minecraft's base mechanics! 
+'''
+
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+#[[dependencies.examplemod]] #optional
+    # the modid of the dependency
+#    modId="forge" #mandatory
+    # Does this dependency have to exist - if not, ordering below must be specified
+#    mandatory=true #mandatory
+    # The version range of the dependency
+#    versionRange="[43,)" #mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+#    ordering="NONE"
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+#    side="BOTH"
