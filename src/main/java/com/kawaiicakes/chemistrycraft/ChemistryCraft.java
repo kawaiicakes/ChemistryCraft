@@ -1,4 +1,4 @@
-package com.kawaiicakes.industrialchemistrycraft;
+package com.kawaiicakes.chemistrycraft;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -27,8 +27,8 @@ import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(IndustrialChemistryCraft.MODID)
-public class IndustrialChemistryCraft
+@Mod(ChemistryCraft.MODID)
+public class ChemistryCraft
 {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "examplemod";
@@ -44,7 +44,7 @@ public class IndustrialChemistryCraft
     // Creates a new BlockItem with the id "examplemod:example_block", combining the namespace and path
     public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 
-    public IndustrialChemistryCraft()
+    public ChemistryCraft()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 

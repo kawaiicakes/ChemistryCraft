@@ -4,14 +4,14 @@ license="MIT License"
 issueTrackerURL="https://github.com/kawaiicakes/Immersive-ChemistryCraft/issues"
 
 [[mods]]
-modId="industrialchemistrycraft"
+modId="chemistrycraft"
 version="${file.jarVersion}" 
 
-displayName="Industrial ChemistryCraft" 
+displayName="ChemistryCraft" 
 
 #displayURL="" #change this to the Curseforge page eventually l m a o
 
-logoFile="industrialchemistrycraft.png"
+logoFile="chemistrycraft.png"
 credits="A heartfelt thanks to the AshleyCraft community, Vazkii, Arcana & Timbr of the Smashing Mods team, and all others who support me~ <3"
 authors="kawaiicakes"
 displayTest="MATCH_VERSION"
@@ -23,14 +23,14 @@ There are various tweaks which may be configured according to your needs. It als
 Will be updating this soon with stuff regarding using this mod as a dependency~
 '''
 
-[[dependencies.industrialchemistrycraft]]
+[[dependencies.chemistrycraft]]
     modId="forge"
     mandatory=true
     versionRange="[43,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.industrialchemistrycraft]]
+[[dependencies.chemistrycraft]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.19.2,)"
