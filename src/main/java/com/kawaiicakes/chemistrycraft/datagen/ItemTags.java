@@ -18,8 +18,7 @@ public class ItemTags extends ForgeRegistryTagsProvider<Item> {
 
     @Override
     protected void addTags() {
-        TagKey<Item> tagKey = Objects.requireNonNull();
-        tag(tagKey).add()
+        //yeah fix this later lol sh!t's an eyesore
     }
 
     @Override
