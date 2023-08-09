@@ -1,6 +1,7 @@
 {
-  "item.chemistrycraft.example_block": "Purple Shit lmao",
-  "block.chemistrycraft.example_block": "Purple Shit lmao",
+  "item.chemistrycraft.hematite_ore": "Hematite Ore",
 
-  "itemGroup.chemistrycraft_items": "ChemistryCraft Items"
+  "block.chemistrycraft.hematite_ore": "Hematite Ore",
+
+  "itemGroup.chemistrycraft_ores": "ChemistryCraft Ores"
 }
