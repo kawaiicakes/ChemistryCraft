@@ -11,7 +11,9 @@ import static com.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID;
 
 public class ItemRegistry {
 
-    static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
+    static final DeferredRegister<Item> GENERIC_REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
+
+
 
     public static final RegistryObject<Item> YUMMY_LEAD = REGISTRY.register("yummy_lead", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().alwaysEat().nutrition(1).build()).tab(ChemistryCraftTabs.ORES)));
     public static void register(IEventBus bus)
