@@ -11,19 +11,8 @@ import static com.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID;
 
 public class ItemRegistry {
 
-    static final DeferredRegister<Item> GENERIC_REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
+    public static final DeferredRegister<Item> GENERIC_REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
+    public static final DeferredRegister<Item> RAW_MINERAL_REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
+    public static final DeferredRegister<Item> BLOCK_ITEM_REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
 
-
-
-    public static final RegistryObject<Item> YUMMY_LEAD = REGISTRY.register("yummy_lead", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().alwaysEat().nutrition(1).build()).tab(ChemistryCraftTabs.ORES)));
-    public static void register(IEventBus bus)
-    {
-        REGISTRY.register(bus);
-    }
 }
-
-/*
-forge scans the entire classpath for annotations in order to detect your classes and methods
-though the event annotation is deprecated, should use IBus#addListener or #addGenericListener
-the annotation one causes too many problems
- */

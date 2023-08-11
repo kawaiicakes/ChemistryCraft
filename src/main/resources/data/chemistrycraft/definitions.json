@@ -2,21 +2,16 @@
   "minerals": [
     {
       "name": "hematite",
-      "allotrope": false,
-      "description": "Hematite is a lustrous metallic gray or reddish-brown mineral that is mined as the main source of iron in the 21st century. Hematite was used as early as the stone age, primarily as a dye or writing utensil due to the vibrant rust-red pigment it has when ground.",
-      "color": "bf0e00",
-      "components": [
-        {
-          "name": "iron_oxide"
-        }
-      ],
-      "properties": {
+      "parent": "iron_oxide",
+      "description": "Hematite is a lustrous metallic gray or reddish-brown mineral that is mined as the main source of iron in the 21st century. Hematite was used as early as the stone age, primarily as a dye or writing utensil due to the vibrant rust-red pigment it has when ground or streaked against surfaces.",
+      "melting_point": 1565.00,
+      "radioactivity": 0.00,
+      "is_dye": true,
+      "crystal_properties": {
         "hardness": 1,
         "tenacity": "brittle",
-        "radioactivity": "0.00"
-      },
-      "melting_point":
+        "crystal_system": "trigonal"
+      }
     }
-  ],
-  "mineraloids": []
+  ]
 }

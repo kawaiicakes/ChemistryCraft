@@ -18,7 +18,8 @@ import static com.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID;
 import static net.minecraftforge.registries.ForgeRegistries.BLOCKS;
 
 public class BlockRegistry {
-    public static final DeferredRegister<Block> ORES = DeferredRegister.create(BLOCKS, MOD_ID);
+    public static final DeferredRegister<Block> ORES_REGISTRY = DeferredRegister.create(BLOCKS, MOD_ID);
+    public static final DeferredRegister<Block> RAW_BLOCK_REGISTRY = DeferredRegister.create(BLOCKS, MOD_ID);
     public static final List<OreBlock> STONE_ORE_BLOCKS = new ArrayList<>();
     public static final List<OreBlock> DEEPSLATE_ORE_BLOCKS = new ArrayList<>();
 
@@ -26,12 +27,12 @@ public class BlockRegistry {
     public static final BlockBehaviour.Properties DEEPSLATE_ORE_PROPERTIES = BlockBehaviour.Properties.of(new Material.Builder(MaterialColor.DEEPSLATE).build()).sound(SoundType.DEEPSLATE);
 
     public static Optional<RegistryObject<Block>> getRegistryObjectByName(String pName) {
-        return ORES.getEntries().stream().filter(blockRegistryObject -> blockRegistryObject.getId().getPath().equals(pName)).findFirst();
+        return ORES_REGISTRY.getEntries().stream().filter(blockRegistryObject -> blockRegistryObject.getId().getPath().equals(pName)).findFirst();
     }
 
     public static void register(IEventBus bus)
     {
-        ORES.register(bus);
+        ORES_REGISTRY.register(bus);
     }
 }
 
