@@ -13,7 +13,7 @@ public class Registry {
     public Registry() {} //  Loads class early. That's it
 
     public static void init(IEventBus bus) {
-        DefinitionRegistry.generate();
+        DefinitionRegistry.generateMinerals();
 
         ItemRegistry.register(bus);
         BlockRegistry.register(bus);

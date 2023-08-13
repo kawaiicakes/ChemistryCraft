@@ -11,7 +11,7 @@ public class DefinitionRegistry {
     public DefinitionRegistry() {} //  Loads class early. That's it
     static final JsonObject DEFINITIONS_JSON =
             Registry.getStreamAsJsonObject("/data/chemistrycraft/definitions.json");
-    static void generate() {
+    static void generateMinerals() {
         DEFINITIONS_JSON.getAsJsonArray("minerals").forEach(mineral -> {
             final JsonObject minObj = mineral.getAsJsonObject();
             final JsonObject crystalProperties = minObj.get("crystal_properties").getAsJsonObject();

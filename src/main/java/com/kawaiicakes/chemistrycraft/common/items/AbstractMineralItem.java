@@ -13,12 +13,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public abstract class AbstractMineralItem extends Item {
+    private String abbreviation;
     private final String constituents;
     private final String description;
     private final float radioactivity;
 
     public AbstractMineralItem(Properties properties, String constituents, String description, boolean burnsInLava, float radioactivity) {
         super(propertyBuilder(properties, burnsInLava));
+        this.abbreviation = "";
         this.constituents = constituents;
         this.description = description;
         this.radioactivity = radioactivity;
@@ -32,6 +34,8 @@ public abstract class AbstractMineralItem extends Item {
 
     @Override
     public abstract void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag tooltipFlag);
+    public void setAbbreviation(String newAbbreviation) {this.abbreviation = newAbbreviation;}
+    public String getAbbreviation() {return this.abbreviation;}
     public String getConstituents() {
         return this.constituents;
     }

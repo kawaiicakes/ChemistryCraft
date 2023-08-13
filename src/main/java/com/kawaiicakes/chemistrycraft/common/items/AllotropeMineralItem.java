@@ -23,6 +23,7 @@ public class AllotropeMineralItem extends AbstractMineralItem {
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag tooltipFlag) {
         final ElementItem parentElement = ItemRegistry.getElementByName(this.getConstituents()).orElseThrow(); // FIXME: ooo. I expect there to be race conditions w/ this
+        setAbbreviation(parentElement.getAbbreviation());
 
         components.add(MutableComponent.create(new LiteralContents(String.format("%s (%d)", parentElement.getAbbreviation(), parentElement.getAtomicNumber()))).withStyle(ChatFormatting.AQUA));
         if (!parentElement.getGroupName().isEmpty()) {
