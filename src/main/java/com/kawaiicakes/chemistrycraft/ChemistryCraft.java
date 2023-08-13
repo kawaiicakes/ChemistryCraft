@@ -10,6 +10,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
+//  TODO: Fix elements so ChemLib is appended to tooltip text
+//  TODO: add ChemLib flare to vanilla items
+//  TODO: consider keeping a field for the constituent parent in the item classes.
+
 @Mod(ChemistryCraft.MOD_ID)
 public class ChemistryCraft
 {
