@@ -16,6 +16,23 @@
         "minecraft:stone",
         "minecraft:deepslate"
       ]
+    },
+    {
+      "name": "graphite",
+      "constituents": "carbon",
+      "allotrope": true,
+      "description": "b",
+      "melting_point": 1565.00,
+      "radioactivity": 0.00,
+      "crystal_properties": {
+        "hardness": 2,
+        "tenacity": "sectile",
+        "crystal_system": "hexagonal"
+      },
+      "present_in_strata": [
+        "minecraft:stone",
+        "minecraft:deepslate"
+      ]
     }
   ]
 }

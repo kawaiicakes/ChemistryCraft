@@ -26,7 +26,7 @@ public class NonAllotropeMineralItem extends AbstractMineralItem {
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag tooltipFlag) { //    TODO: redo temp. impl. of getting abbreviation. This relies on ChemLib having the compound. What if it doesn't?
         components.add(MutableComponent.create(new LiteralContents(ItemRegistry.getCompoundByName(this.getConstituents()).orElseThrow().getAbbreviation())).withStyle(ChatFormatting.DARK_AQUA));
-        components.add(MutableComponent.create(new LiteralContents(StringUtils.capitalize(this.getNamespace()))).withStyle(ChemistryCraft.MOD_ID_TEXT_STYLE)); //   TODO: ugh.
+        components.add(MutableComponent.create(new LiteralContents("ChemistryCraft")).withStyle(ChemistryCraft.MOD_ID_TEXT_STYLE)); //   TODO: ugh.
     }
 
     public String getNamespace() {

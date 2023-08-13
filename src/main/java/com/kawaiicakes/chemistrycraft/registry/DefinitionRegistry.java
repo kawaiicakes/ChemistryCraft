@@ -3,6 +3,7 @@ package com.kawaiicakes.chemistrycraft.registry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.kawaiicakes.chemistrycraft.api.Constants;
+import com.kawaiicakes.chemistrycraft.common.items.AllotropeMineralItem;
 import com.kawaiicakes.chemistrycraft.common.items.NonAllotropeMineralItem;
 import net.minecraft.world.item.Item;
 
@@ -32,6 +33,8 @@ public class DefinitionRegistry {
 
             if (!allotrope) {
                 ItemRegistry.RAW_MINERAL_REGISTRY.register(name, () -> new NonAllotropeMineralItem(new Item.Properties(), constituents, description, burnsInLava, radiation));
+            } else {
+                ItemRegistry.RAW_MINERAL_REGISTRY.register(name, () -> new AllotropeMineralItem(new Item.Properties(), constituents, description, burnsInLava, radiation));
             }
         });
     }
