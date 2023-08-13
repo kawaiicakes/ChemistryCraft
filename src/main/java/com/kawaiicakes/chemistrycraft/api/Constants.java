@@ -8,4 +8,5 @@ package com.kawaiicakes.chemistrycraft.api;
  */
 public class Constants {
     public static final short LAVA_TEMPERATURE = 1_000;
+    public static final float ABSOLUTE_ZERO = -273.15F;
 }

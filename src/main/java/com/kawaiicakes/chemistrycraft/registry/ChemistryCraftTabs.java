@@ -13,10 +13,12 @@ public class ChemistryCraftTabs {
             return Blocks.DIAMOND_BLOCK.asItem().getDefaultInstance();
         }
     };
+
     public static final CreativeModeTab BUILDING_BLOCKS = new CreativeModeTab("chemistrycraft_blocks") {
         @Override
         public @NotNull ItemStack makeIcon() {return Items.AMETHYST_BLOCK.getDefaultInstance();}
     };
+
     public static final CreativeModeTab MINERALS = new CreativeModeTab("chemistrycraft_minerals") {
         @Override
         public @NotNull ItemStack makeIcon() {

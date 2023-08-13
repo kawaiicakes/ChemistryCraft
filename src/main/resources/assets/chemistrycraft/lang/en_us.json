@@ -1,7 +1,7 @@
 {
   "item.chemistrycraft.hematite_ore": "Hematite Ore",
-
   "block.chemistrycraft.hematite_ore": "Hematite Ore",
 
-  "itemGroup.chemistrycraft_ores": "ChemistryCraft Ores"
+  "itemGroup.chemistrycraft_ores": "ChemistryCraft Ores",
+  "itemGroup.chemistrycraft_minerals": "ChemistryCraft Minerals"
 }
