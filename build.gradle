@@ -109,7 +109,7 @@ jar {
         attributes([
                 "Specification-Title"     : "chemistrycraft",
                 "Specification-Vendor"    : "kawaiicakes",
-                "Specification-Version"   : "0",
+                "Specification-Version"   : "${project.version}",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "kawaiicakes",

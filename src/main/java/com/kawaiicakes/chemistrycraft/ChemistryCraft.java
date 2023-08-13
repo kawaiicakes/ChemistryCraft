@@ -2,6 +2,7 @@ package com.kawaiicakes.chemistrycraft;
 
 import com.kawaiicakes.chemistrycraft.registry.BlockRegistry;
 import com.kawaiicakes.chemistrycraft.registry.ItemRegistry;
+import com.kawaiicakes.chemistrycraft.registry.Registry;
 import com.mojang.logging.LogUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Style;
@@ -14,36 +15,23 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-@Mod(ChemistryCraft.MOD_ID)
+@Mod("chemistrycraft")
 public class ChemistryCraft
 {
     public static final String MOD_ID = "chemistrycraft";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
+    public static final Style MOD_ID_TEXT_STYLE;
 
     public ChemistryCraft()
     {
+        MinecraftForge.EVENT_BUS.register(this);
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        BlockRegistry.register(modEventBus);
-        ItemRegistry.register(modEventBus);
-
-        modEventBus.addListener(this::commonSetup);
-
-        MinecraftForge.EVENT_BUS.register(this);
+        Registry.init(modEventBus);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
+    static {
+        MOD_ID_TEXT_STYLE = Style.EMPTY.withFont(Style.DEFAULT_FONT).withItalic(true).withColor(ChatFormatting.BLUE);
+        LOGGER.info("Successfully initialized " + MOD_ID);
     }
-
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ClientModEvents
-    {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            //code here lawl
-        }
-
-    }
-
 }

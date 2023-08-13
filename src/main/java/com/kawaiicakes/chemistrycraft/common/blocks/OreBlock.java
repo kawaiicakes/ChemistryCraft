@@ -1,4 +1,9 @@
 package com.kawaiicakes.chemistrycraft.common.blocks;
 
-public class OreBlock {
+import net.minecraft.world.level.block.Block;
+
+public class OreBlock extends Block {
+    public OreBlock(Properties properties) {
+        super(properties);
+    }
 }
