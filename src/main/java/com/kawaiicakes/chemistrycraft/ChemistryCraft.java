@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 //  TODO: Fix elements so ChemLib is appended to tooltip text
 //  TODO: add ChemLib flare to vanilla items
 //  TODO: consider keeping a field for the constituent parent in the item classes.
+//  TODO: Properties builder but also MineralBuilder in lieu of current JSON system?
 
 @Mod(ChemistryCraft.MOD_ID)
 public class ChemistryCraft
