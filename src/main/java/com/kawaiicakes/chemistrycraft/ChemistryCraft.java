@@ -1,6 +1,5 @@
 package com.kawaiicakes.chemistrycraft;
 
-import com.kawaiicakes.chemistrycraft.registry.Registry;
 import com.mojang.logging.LogUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Style;
@@ -26,8 +25,6 @@ public class ChemistryCraft
     {
         MinecraftForge.EVENT_BUS.register(this);
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
-        Registry.init(modEventBus);
     }
 
     static { // Appears to be necessary to initialize the static fields of this class early on
