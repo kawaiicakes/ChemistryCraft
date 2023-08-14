@@ -1,13 +1,15 @@
 package com.kawaiicakes.chemistrycraft.registry;
 
-import net.minecraft.world.food.FoodProperties;
+import com.kawaiicakes.chemistrycraft.api.registry.MaterialDefinition;
+import com.kawaiicakes.chemistrycraft.common.items.AbstractMineralItem;
+import com.kawaiicakes.chemistrycraft.common.items.AllotropeMineralItem;
+import com.kawaiicakes.chemistrycraft.common.items.NonAllotropeMineralItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
+import java.util.AbstractCollection;
 import java.util.function.Supplier;
 
 import static com.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID;
@@ -15,14 +17,13 @@ import static com.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID;
 public class ItemRegistry {
     ItemRegistry(){}
 
-    public static final DeferredRegister<Item> GENERIC_REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
-    public static final DeferredRegister<Item> RAW_MINERAL_REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
-    public static final DeferredRegister<Item> BLOCK_ITEM_REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
+    public static final DeferredRegister<Item> CHEMISTRYCRAFT_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
 
-    public static void register(IEventBus bus)
-    {
-        GENERIC_REGISTRY.register(bus);
-        RAW_MINERAL_REGISTRY.register(bus);
-        BLOCK_ITEM_REGISTRY.register(bus);
+    public static <T extends AbstractMineralItem> void registerMineral(MaterialDefinition materialDefinition) {
+
+    }
+
+    public static void register(IEventBus bus) {
+        CHEMISTRYCRAFT_ITEMS.register(bus);
     }
 }

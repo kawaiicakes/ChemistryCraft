@@ -1,9 +1,7 @@
 package com.kawaiicakes.chemistrycraft.registry;
 
 import com.google.gson.JsonArray;
-import com.kawaiicakes.chemistrycraft.common.blocks.OreBlock;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -14,9 +12,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 import static com.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID;

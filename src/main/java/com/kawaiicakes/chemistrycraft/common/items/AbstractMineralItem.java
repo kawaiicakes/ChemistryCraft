@@ -1,5 +1,6 @@
 package com.kawaiicakes.chemistrycraft.common.items;
 
+import com.kawaiicakes.chemistrycraft.api.registry.MaterialDefinition;
 import com.kawaiicakes.chemistrycraft.registry.ChemistryCraftTabs;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
@@ -18,18 +19,12 @@ public abstract class AbstractMineralItem extends Item {
     private final String description;
     private final float radioactivity;
 
-    public AbstractMineralItem(Properties properties, String constituents, String description, boolean burnsInLava, float radioactivity) {
-        super(propertyBuilder(properties, burnsInLava));
+    public AbstractMineralItem(MaterialDefinition materialDefinition) {
+        super(materialDefinition.buildItemProperties());
         this.abbreviation = "";
-        this.constituents = constituents;
-        this.description = description;
-        this.radioactivity = radioactivity;
-    }
-
-    //  I'm gonna be adding more onto this
-    private static Properties propertyBuilder(Properties properties, boolean burnsInLava) {
-        if (burnsInLava) properties.fireResistant();
-        return properties.tab(ChemistryCraftTabs.MINERALS);
+        this.constituents = materialDefinition.constituents;
+        this.description = materialDefinition.description;
+        this.radioactivity = materialDefinition.radiation;
     }
 
     @Override

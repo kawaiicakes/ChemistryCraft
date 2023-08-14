@@ -1,6 +1,7 @@
 package com.kawaiicakes.chemistrycraft.common.items;
 
 import com.kawaiicakes.chemistrycraft.ChemistryCraft;
+import com.kawaiicakes.chemistrycraft.api.registry.MaterialDefinition;
 import com.smashingmods.chemlib.ChemLib;
 import com.smashingmods.chemlib.registry.ItemRegistry;
 import net.minecraft.ChatFormatting;
@@ -19,8 +20,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class NonAllotropeMineralItem extends AbstractMineralItem {
-    public NonAllotropeMineralItem(Properties properties, String constituents, String description, boolean burnsInLava, float radioactivity) {
-        super(properties, constituents, description, burnsInLava, radioactivity);
+    public NonAllotropeMineralItem(MaterialDefinition materialDefinition) {
+        super(materialDefinition);
     }
 
     @Override
