@@ -1,4 +1,4 @@
-package com.kawaiicakes.chemistrycraft.utils;
+package com.kawaiicakes.chemistrycraft.api.chemlib;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Json {
 
-    //i think i should generalize this method more. it's written exclusively for ChemLibMixinRegistry.
+    //  TODO: generalize this method more. it's written exclusively for ChemLibMixinRegistry.
     public static void injectNewColorToIndexFromJsonMap(@NotNull Map<String, JsonArray> src, int index, String color) {
         final JsonArray jsonArray = src.get("elements");
         final JsonObject srcObj = (JsonObject) jsonArray.get(index);

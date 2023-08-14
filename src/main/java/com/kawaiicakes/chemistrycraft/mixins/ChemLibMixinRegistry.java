@@ -2,7 +2,7 @@ package com.kawaiicakes.chemistrycraft.mixins;
 
 import com.google.gson.*;
 
-import com.kawaiicakes.chemistrycraft.utils.Json;
+import com.kawaiicakes.chemistrycraft.api.chemlib.Json;
 import com.smashingmods.chemlib.ChemLib;
 import com.smashingmods.chemlib.registry.Registry;
 
