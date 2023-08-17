@@ -1,6 +1,7 @@
 package io.github.kawaiicakes.chemistrycraft.api.properties;
 
 import io.github.kawaiicakes.chemistrycraft.api.ChemicalProperty;
+import io.github.kawaiicakes.chemistrycraft.api.utils.PhasePair;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.fluids.FluidType;
@@ -21,8 +22,10 @@ public class Phases implements ChemicalProperty {
      */
     private float meltingPoint;
 
-    private float criticalPoint;
-    private float triplePoint;
+    private PhasePair criticalPoint;
+    private PhasePair triplePoint;
+
+    private float specificHeatCapacity;
 
 
     @Override
