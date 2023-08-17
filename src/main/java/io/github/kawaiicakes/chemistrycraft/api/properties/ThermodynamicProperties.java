@@ -1,6 +1,6 @@
 package io.github.kawaiicakes.chemistrycraft.api.properties;
 
-import io.github.kawaiicakes.chemistrycraft.api.ChemicalProperty;
+import io.github.kawaiicakes.chemistrycraft.api.Constants;
 import io.github.kawaiicakes.chemistrycraft.api.utils.PhasePair;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -9,10 +9,10 @@ import net.minecraftforge.fluids.FluidType;
 //  TODO: gas implementation... oh boy...
 
 /**
- * Describes the phase behaviours of a substance. New instances may be instantiated via <code>PhaseDiagram</code>
+ * Describes the thermodynamic behaviours of a substance. New instances may be instantiated with a <code>PhaseDiagram</code>
  * or by passing primitives to the constructor when information is lacking on a substance.
  */
-public class Phases implements ChemicalProperty {
+public class ThermodynamicProperties implements ChemicalProperty {
     /**
      * Assume pressure at SATP.
      */
@@ -26,11 +26,13 @@ public class Phases implements ChemicalProperty {
     private PhasePair triplePoint;
 
     private float specificHeatCapacity;
-
+    private float thermalConductivity; //   TODO: determine need for unit types
 
     @Override
     public Item.Properties generateItemProperties() {
-        return null;
+        Item.Properties properties = new Item.Properties();
+        if (this.meltingPoint > Constants.LAVA_TEMPERATURE) properties.fireResistant();
+        return properties;
     }
 
     @Override

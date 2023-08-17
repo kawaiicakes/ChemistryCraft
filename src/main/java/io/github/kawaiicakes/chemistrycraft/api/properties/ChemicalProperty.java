@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.api;
+package io.github.kawaiicakes.chemistrycraft.api.properties;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockBehaviour;
