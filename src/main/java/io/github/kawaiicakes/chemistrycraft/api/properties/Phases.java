@@ -6,7 +6,25 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.fluids.FluidType;
 
 //  TODO: gas implementation... oh boy...
-public class PhaseChanges implements ChemicalProperty {
+
+/**
+ * Describes the phase behaviours of a substance. New instances may be instantiated via <code>PhaseDiagram</code>
+ * or by passing primitives to the constructor when information is lacking on a substance.
+ */
+public class Phases implements ChemicalProperty {
+    /**
+     * Assume pressure at SATP.
+     */
+    private float boilingPoint;
+    /**
+     * Assume pressure at SATP.
+     */
+    private float meltingPoint;
+
+    private float criticalPoint;
+    private float triplePoint;
+
+
     @Override
     public Item.Properties generateItemProperties() {
         return null;
