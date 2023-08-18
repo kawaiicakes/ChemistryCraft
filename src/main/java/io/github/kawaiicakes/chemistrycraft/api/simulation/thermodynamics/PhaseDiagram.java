@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.api.utils;
+package io.github.kawaiicakes.chemistrycraft.api.simulation.thermodynamics;
 
 // https://github.com/jtablesaw/tablesaw
 // https://poi.apache.org/

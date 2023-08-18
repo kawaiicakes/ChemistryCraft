@@ -1,7 +1,7 @@
 package io.github.kawaiicakes.chemistrycraft.api.properties;
 
 import io.github.kawaiicakes.chemistrycraft.api.Constants;
-import io.github.kawaiicakes.chemistrycraft.api.utils.PhasePair;
+import io.github.kawaiicakes.chemistrycraft.api.utils.PTPair;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.fluids.FluidType;
@@ -22,8 +22,8 @@ public class ThermodynamicProperties implements ChemicalProperty {
      */
     private float meltingPoint;
 
-    private PhasePair criticalPoint;
-    private PhasePair triplePoint;
+    private PTPair criticalPoint;
+    private PTPair triplePoint;
 
     private float specificHeatCapacity;
     private float thermalConductivity; //   TODO: determine need for unit types
