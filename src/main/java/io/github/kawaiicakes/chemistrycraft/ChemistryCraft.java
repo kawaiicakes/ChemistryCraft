@@ -19,7 +19,7 @@ import org.slf4j.Logger;
     then performant use of initialized fields rather than continually running intense calculations
     to simulate desired behaviours.
 
-    For example, a custom item may have a certain final field of some AbstractEnthalpy, which is
+    For example, a custom item may have a certain final field of some Enthalpy, which is
     calculated and initialized once prior to object registration. This immutable property of the
     item is then accessed when necessary, using principles of encapsulation, by higher-levels of
     the API for calculation of a promised behaviour; then returned to lower-levels of the API for
