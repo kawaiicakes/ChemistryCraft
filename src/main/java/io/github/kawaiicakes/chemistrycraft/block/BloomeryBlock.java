@@ -1,6 +1,6 @@
 package io.github.kawaiicakes.chemistrycraft.block;
 
-import io.github.kawaiicakes.chemistrycraft.block.entity.PrimitiveFurnaceBlockEntity;
+import io.github.kawaiicakes.chemistrycraft.block.entity.BloomeryBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -17,10 +17,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-import static io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry.PRIMITIVE_FURNACE_ENTITY;
+import static io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry.BLOOMERY_ENTITY;
 
-public class PrimitiveFurnaceBlock extends BaseEntityBlock {
-    protected PrimitiveFurnaceBlock(Properties properties) {
+public class BloomeryBlock extends BaseEntityBlock {
+    public BloomeryBlock(Properties properties) {
         super(properties);
     }
 
@@ -37,8 +37,8 @@ public class PrimitiveFurnaceBlock extends BaseEntityBlock {
     public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState newBlockState, boolean isMoving) {
         if (blockState.getBlock() != newBlockState.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof PrimitiveFurnaceBlockEntity primitiveFurnaceBlockEntity) {
-                primitiveFurnaceBlockEntity.drops();
+            if (blockEntity instanceof BloomeryBlockEntity bloomeryBlockEntity) {
+                bloomeryBlockEntity.drops();
             }
         }
         super.onRemove(blockState, level, blockPos, newBlockState, isMoving);
@@ -48,10 +48,10 @@ public class PrimitiveFurnaceBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (!level.isClientSide) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof PrimitiveFurnaceBlockEntity primitiveFurnaceBlockEntity) {
-                NetworkHooks.openScreen((ServerPlayer) player, primitiveFurnaceBlockEntity, blockPos);
+            if (blockEntity instanceof BloomeryBlockEntity bloomeryBlockEntity) {
+                NetworkHooks.openScreen((ServerPlayer) player, bloomeryBlockEntity, blockPos);
             } else {
-                throw new IllegalStateException("Missing Container provider for PrimitiveFurnaceBlockEntity!");
+                throw new IllegalStateException("Missing Container provider for BloomeryBlockEntity!");
             }
         }
 
@@ -61,13 +61,13 @@ public class PrimitiveFurnaceBlock extends BaseEntityBlock {
     @Nullable
     @Override //    Called when actual block entity is spawned
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new PrimitiveFurnaceBlockEntity(blockPos, blockState);
+        return new BloomeryBlockEntity(blockPos, blockState);
     }
 
     @Nullable
     @Override //    gets static ticking logic of block entity
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> tBlockEntityType) {
-        return createTickerHelper(tBlockEntityType, PRIMITIVE_FURNACE_ENTITY.get(),
-                PrimitiveFurnaceBlockEntity::tick);
+        return createTickerHelper(tBlockEntityType, BLOOMERY_ENTITY.get(),
+                BloomeryBlockEntity::tick);
     }
 }

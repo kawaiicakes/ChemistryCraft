@@ -1,6 +1,6 @@
 package io.github.kawaiicakes.chemistrycraft.screen;
 
-import io.github.kawaiicakes.chemistrycraft.block.entity.PrimitiveFurnaceBlockEntity;
+import io.github.kawaiicakes.chemistrycraft.block.entity.BloomeryBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -11,22 +11,22 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-import static io.github.kawaiicakes.chemistrycraft.registry.BlockRegistry.PRIMITIVE_FURNACE;
-import static io.github.kawaiicakes.chemistrycraft.registry.MenuRegistry.FURNACE_MENU;
+import static io.github.kawaiicakes.chemistrycraft.registry.BlockRegistry.BLOOMERY;
+import static io.github.kawaiicakes.chemistrycraft.registry.MenuRegistry.BLOOMERY_MENU;
 
-public class PrimitiveFurnaceBlockMenu extends AbstractContainerMenu {
-    public final PrimitiveFurnaceBlockEntity entity;
+public class BloomeryBlockMenu extends AbstractContainerMenu {
+    public final BloomeryBlockEntity entity;
     private final Level level;
-    private final ContainerData data; // takes ContainerData from PrimitiveFurnaceBlockEntity
+    private final ContainerData data; // takes ContainerData from BloomeryBlockEntity
 
-    public PrimitiveFurnaceBlockMenu(int id, Inventory inv, FriendlyByteBuf data) {
+    public BloomeryBlockMenu(int id, Inventory inv, FriendlyByteBuf data) {
         this(id, inv, inv.player.level.getBlockEntity(data.readBlockPos()), new SimpleContainerData(2));
-        //  SimpleContainerData constructor argument must = return of getCount of PrimitiveFurnaceBlockEntity$data
+        //  SimpleContainerData constructor argument must = return of getCount of BloomeryBlockEntity$data
     }
-    public PrimitiveFurnaceBlockMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(FURNACE_MENU.get(), id);
+    public BloomeryBlockMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(BLOOMERY_MENU.get(), id);
         checkContainerSize(inv, 3); //  Number = that in ItemStackHandler
-        this.entity = (PrimitiveFurnaceBlockEntity) entity;
+        this.entity = (BloomeryBlockEntity) entity;
         this.level = inv.player.level;
         this.data = data;
 
@@ -108,7 +108,7 @@ public class PrimitiveFurnaceBlockMenu extends AbstractContainerMenu {
 
     @Override //    Checks if still able to actually right-click block at the position
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, this.entity.getBlockPos()), player, PRIMITIVE_FURNACE.get());
+        return stillValid(ContainerLevelAccess.create(level, this.entity.getBlockPos()), player, BLOOMERY.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) { //     FIXME: magic numbers

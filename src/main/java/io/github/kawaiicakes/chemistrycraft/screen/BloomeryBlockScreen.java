@@ -10,11 +10,11 @@ import net.minecraft.world.entity.player.Inventory;
 
 import static io.github.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID;
 
-public class PrimitiveFurnaceBlockScreen extends AbstractContainerScreen<PrimitiveFurnaceBlockMenu> {
+public class BloomeryBlockScreen extends AbstractContainerScreen<BloomeryBlockMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(MOD_ID,"textures/gui/primitive_furnace_gui.png");
+            new ResourceLocation(MOD_ID,"textures/gui/bloomery_gui.png");
 
-    public PrimitiveFurnaceBlockScreen(PrimitiveFurnaceBlockMenu menu, Inventory inv, Component component) {
+    public BloomeryBlockScreen(BloomeryBlockMenu menu, Inventory inv, Component component) {
         super(menu, inv, component);
     }
 

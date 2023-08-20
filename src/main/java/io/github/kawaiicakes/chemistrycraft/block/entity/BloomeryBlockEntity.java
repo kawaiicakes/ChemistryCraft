@@ -1,6 +1,6 @@
 package io.github.kawaiicakes.chemistrycraft.block.entity;
 
-import io.github.kawaiicakes.chemistrycraft.screen.PrimitiveFurnaceBlockMenu;
+import io.github.kawaiicakes.chemistrycraft.screen.BloomeryBlockMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -24,10 +24,10 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry.PRIMITIVE_FURNACE_ENTITY;
-import static io.github.kawaiicakes.chemistrycraft.registry.ItemRegistry.BALLSMUNGUS;
+import static io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry.BLOOMERY_ENTITY;
+import static io.github.kawaiicakes.chemistrycraft.registry.ItemRegistry.BLOOMERY_ITEM;
 
-public class PrimitiveFurnaceBlockEntity extends BlockEntity implements MenuProvider {
+public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     //  Inventory of the block entity
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
         @Override
@@ -43,14 +43,14 @@ public class PrimitiveFurnaceBlockEntity extends BlockEntity implements MenuProv
     private int progress = 0;
     private int maxProgress = 78;
 
-    public PrimitiveFurnaceBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(PRIMITIVE_FURNACE_ENTITY.get(), blockPos, blockState);
+    public BloomeryBlockEntity(BlockPos blockPos, BlockState blockState) {
+        super(BLOOMERY_ENTITY.get(), blockPos, blockState);
         this.data = new ContainerData() {
             @Override
             public int get(int index) { //  'Saves' these values into our ContainerData
                 return switch (index) {
-                    case 0 -> PrimitiveFurnaceBlockEntity.this.progress;
-                    case 1 -> PrimitiveFurnaceBlockEntity.this.maxProgress;
+                    case 0 -> BloomeryBlockEntity.this.progress;
+                    case 1 -> BloomeryBlockEntity.this.maxProgress;
                     default -> 0;
                 };
             }
@@ -58,8 +58,8 @@ public class PrimitiveFurnaceBlockEntity extends BlockEntity implements MenuProv
             @Override
             public void set(int index, int value) { //  'Saves' these values into our ContainerData
                 switch (index) {
-                    case 0 -> PrimitiveFurnaceBlockEntity.this.progress = value;
-                    case 1 -> PrimitiveFurnaceBlockEntity.this.maxProgress = value;
+                    case 0 -> BloomeryBlockEntity.this.progress = value;
+                    case 1 -> BloomeryBlockEntity.this.maxProgress = value;
                 }
             }
 
@@ -78,7 +78,7 @@ public class PrimitiveFurnaceBlockEntity extends BlockEntity implements MenuProv
     @Nullable
     @Override //    renders GUI when called
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return new PrimitiveFurnaceBlockMenu(id, inventory, this, this.data);
+        return new BloomeryBlockMenu(id, inventory, this, this.data);
     }
 
     @Override //    Allows import/export to inventory
@@ -105,7 +105,7 @@ public class PrimitiveFurnaceBlockEntity extends BlockEntity implements MenuProv
     @Override   //  Saves inventory
     protected void saveAdditional(CompoundTag nbt) {
         nbt.put("inventory", itemHandler.serializeNBT());
-        nbt.putInt("furnace_progress", this.progress);
+        nbt.putInt("bloomery_progress", this.progress);
 
         super.saveAdditional(nbt);
     }
@@ -114,7 +114,7 @@ public class PrimitiveFurnaceBlockEntity extends BlockEntity implements MenuProv
     public void load(CompoundTag nbt) {
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
-        this.progress = nbt.getInt("furnace_progress");
+        this.progress = nbt.getInt("bloomery_progress");
     }
 
     //  Called inside of block class when destroyed so that inventory drops
@@ -127,17 +127,17 @@ public class PrimitiveFurnaceBlockEntity extends BlockEntity implements MenuProv
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState blockState, PrimitiveFurnaceBlockEntity primitiveFurnaceBlockEntity) {
+    public static void tick(Level level, BlockPos blockPos, BlockState blockState, BloomeryBlockEntity bloomeryBlockEntity) {
         if (!level.isClientSide()) {
-            if (hasRecipe(primitiveFurnaceBlockEntity)) {
-                primitiveFurnaceBlockEntity.progress++;
+            if (hasRecipe(bloomeryBlockEntity)) {
+                bloomeryBlockEntity.progress++;
                 setChanged(level, blockPos, blockState); // Causes reload when necessary
 
-                if (primitiveFurnaceBlockEntity.progress >= primitiveFurnaceBlockEntity.maxProgress) {
-                    craftItem(primitiveFurnaceBlockEntity);
+                if (bloomeryBlockEntity.progress >= bloomeryBlockEntity.maxProgress) {
+                    craftItem(bloomeryBlockEntity);
                 }
             } else {
-                primitiveFurnaceBlockEntity.resetProgress();
+                bloomeryBlockEntity.resetProgress();
                 setChanged(level, blockPos, blockState);
             }
         }
@@ -146,24 +146,24 @@ public class PrimitiveFurnaceBlockEntity extends BlockEntity implements MenuProv
     private void resetProgress() {
         this.progress = 0;
     }
-    private static void craftItem(PrimitiveFurnaceBlockEntity entity) { //  FIXME: hard coded.
+    private static void craftItem(BloomeryBlockEntity entity) { //  FIXME: hard coded.
         if (hasRecipe(entity)) {
             entity.itemHandler.extractItem(1, 1, false);
-            entity.itemHandler.setStackInSlot(2, new ItemStack(BALLSMUNGUS.get(), entity.itemHandler.getStackInSlot(2).getCount() + 1));
+            entity.itemHandler.setStackInSlot(2, new ItemStack(BLOOMERY_ITEM.get(), entity.itemHandler.getStackInSlot(2).getCount() + 1));
 
             entity.resetProgress();
         }
     }
 
-    private static boolean hasRecipe(PrimitiveFurnaceBlockEntity entity) { //   FIXME: this is hard coded. Datagen and JSON recipes come later.
+    private static boolean hasRecipe(BloomeryBlockEntity entity) { //   FIXME: this is hard coded. Datagen and JSON recipes come later.
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots()); //  makes inventory to make life easier
         for (int i = 0; i < entity.itemHandler.getSlots(); ++i) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        boolean hasMineralInSlot1 = entity.itemHandler.getStackInSlot(1).getItem() == BALLSMUNGUS.get();
+        boolean hasMineralInSlot1 = entity.itemHandler.getStackInSlot(1).getItem() == BLOOMERY_ITEM.get();
 
-        return hasMineralInSlot1 && canInsertAmountIntoOutputSlot(inventory) && canInsertItemIntoOutputSlot(inventory, new ItemStack(BALLSMUNGUS.get(), 1));
+        return hasMineralInSlot1 && canInsertAmountIntoOutputSlot(inventory) && canInsertItemIntoOutputSlot(inventory, new ItemStack(BLOOMERY_ITEM.get(), 1));
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack itemStack) {
