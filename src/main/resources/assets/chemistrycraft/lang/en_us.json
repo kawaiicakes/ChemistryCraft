@@ -2,6 +2,9 @@
   "item.chemistrycraft.hematite_ore": "Hematite Ore",
   "block.chemistrycraft.hematite_ore": "Hematite Ore",
 
+  "item.chemistrycraft.bloomery": "Bloomery",
+  "block.chemistrycraft.bloomery": "Bloomery",
+
   "itemGroup.chemistrycraft_ores": "ChemistryCraft Ores",
   "itemGroup.chemistrycraft_minerals": "ChemistryCraft Minerals"
 }
