@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "chemistrycraft:blocks/bloomery"
+    },
+    "facing=south": {
+      "model": "chemistrycraft:blocks/bloomery",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "chemistrycraft:blocks/bloomery",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "chemistrycraft:blocks/bloomery",
+      "y": 90
+    }
+  }
+}
