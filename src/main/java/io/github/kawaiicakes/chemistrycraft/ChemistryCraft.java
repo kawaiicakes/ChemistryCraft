@@ -1,10 +1,7 @@
 package io.github.kawaiicakes.chemistrycraft;
 
 import com.mojang.logging.LogUtils;
-import io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry;
-import io.github.kawaiicakes.chemistrycraft.registry.BlockRegistry;
-import io.github.kawaiicakes.chemistrycraft.registry.ItemRegistry;
-import io.github.kawaiicakes.chemistrycraft.registry.MenuRegistry;
+import io.github.kawaiicakes.chemistrycraft.registry.*;
 import io.github.kawaiicakes.chemistrycraft.screen.BloomeryBlockScreen;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -77,6 +74,7 @@ public class ChemistryCraft
         BlockRegistry.register(modEventBus);
         ItemRegistry.register(modEventBus);
         MenuRegistry.register(modEventBus);
+        RecipeRegistry.register(modEventBus);
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)

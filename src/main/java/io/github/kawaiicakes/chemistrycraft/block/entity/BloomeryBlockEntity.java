@@ -1,5 +1,6 @@
 package io.github.kawaiicakes.chemistrycraft.block.entity;
 
+import io.github.kawaiicakes.chemistrycraft.recipe.BloomeryRecipe;
 import io.github.kawaiicakes.chemistrycraft.screen.BloomeryBlockMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -23,6 +24,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 import static io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry.BLOOMERY_ENTITY;
 import static io.github.kawaiicakes.chemistrycraft.registry.ItemRegistry.BLOOMERY_ITEM;
@@ -146,24 +149,33 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     private void resetProgress() {
         this.progress = 0;
     }
-    private static void craftItem(BloomeryBlockEntity entity) { //  FIXME: hard coded.
-        if (hasRecipe(entity)) {
-            entity.itemHandler.extractItem(1, 1, false);
-            entity.itemHandler.setStackInSlot(2, new ItemStack(BLOOMERY_ITEM.get(), entity.itemHandler.getStackInSlot(2).getCount() + 1));
-
-            entity.resetProgress();
-        }
-    }
-
-    private static boolean hasRecipe(BloomeryBlockEntity entity) { //   FIXME: this is hard coded. Datagen and JSON recipes come later.
+    private static void craftItem(BloomeryBlockEntity entity) { // Called when item is crafted
+        Level level = entity.getLevel();
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots()); //  makes inventory to make life easier
         for (int i = 0; i < entity.itemHandler.getSlots(); ++i) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        boolean hasMineralInSlot1 = entity.itemHandler.getStackInSlot(1).getItem() == BLOOMERY_ITEM.get();
+        Optional<BloomeryRecipe> recipe = level.getRecipeManager().getRecipeFor(BloomeryRecipe.Type.INSTANCE, inventory, level);
 
-        return hasMineralInSlot1 && canInsertAmountIntoOutputSlot(inventory) && canInsertItemIntoOutputSlot(inventory, new ItemStack(BLOOMERY_ITEM.get(), 1));
+        if (hasRecipe(entity)) {
+            entity.itemHandler.extractItem(1, 1, false); // recipe.get().getResultItem().getItem(); ignores count!
+            entity.itemHandler.setStackInSlot(2, new ItemStack(recipe.get().getResultItem().getItem(), entity.itemHandler.getStackInSlot(2).getCount() + 1));
+
+            entity.resetProgress();
+        }
+    }
+
+    private static boolean hasRecipe(BloomeryBlockEntity entity) { // Checks if a valid recipe exists
+        Level level = entity.getLevel();
+        SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots()); //  makes inventory to make life easier
+        for (int i = 0; i < entity.itemHandler.getSlots(); ++i) {
+            inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
+        }
+
+        Optional<BloomeryRecipe> recipe = level.getRecipeManager().getRecipeFor(BloomeryRecipe.Type.INSTANCE, inventory, level);
+
+        return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) && canInsertItemIntoOutputSlot(inventory, recipe.get().getResultItem());
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack itemStack) {
