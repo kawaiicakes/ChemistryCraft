@@ -17,6 +17,7 @@ import java.util.List;
 public class EnergyInfoArea extends InfoArea {
     private final IEnergyStorage energy;
 
+    //both 8 and 64 determine bar size
     public EnergyInfoArea(int xMin, int yMin)  {
         this(xMin, yMin, null,8,64);
     }

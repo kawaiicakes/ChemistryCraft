@@ -46,6 +46,10 @@ public class BloomeryBlockMenu extends AbstractContainerMenu {
         return data.get(0) > 0; //  Checks for progress
     }
 
+    public BloomeryBlockEntity getBlockEntity() {
+        return this.entity;
+    }
+
     public int getScaledProgress() { // Determines visual progress percentage
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);  // Max Progress

@@ -1,7 +1,10 @@
 package io.github.kawaiicakes.chemistrycraft.block.entity;
 
 import io.github.kawaiicakes.chemistrycraft.block.BloomeryBlock;
+import io.github.kawaiicakes.chemistrycraft.capabilities.AbstractEnergyStorage;
 import io.github.kawaiicakes.chemistrycraft.capabilities.WrappedItemHandler;
+import io.github.kawaiicakes.chemistrycraft.network.ChemistryPackets;
+import io.github.kawaiicakes.chemistrycraft.network.packets.EnergyS2CPacket;
 import io.github.kawaiicakes.chemistrycraft.recipe.BloomeryRecipe;
 import io.github.kawaiicakes.chemistrycraft.screen.BloomeryBlockMenu;
 import net.minecraft.core.BlockPos;
@@ -16,12 +19,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
@@ -53,7 +58,18 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
         }
     };
 
-    //  Makes inventory available via capabilities
+    // Referenced in #getCapability
+    private final AbstractEnergyStorage ENERGY_STORAGE = new AbstractEnergyStorage(60000, 256) {
+        @Override
+        public void onEnergyChanged() {
+            setChanged(); //    Forces chunk to save later
+            ChemistryPackets.sendToClients(new EnergyS2CPacket(this.energy, getBlockPos()));
+        }
+    };
+
+    private static final int ENERGY_REQ = 32; // Energy change per tick
+
+    //  Makes inventory available via capabilities. a lazy handler must exist for each capability used
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     //  When #getCapability on BloomerBlockEntity is called, this method ensures that the correct sides line up for I/O.
     //  Furthermore, it defines the faces that accept certain I/O.
@@ -67,6 +83,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
                     Direction.WEST, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (index) -> index == 0 || index == 1,
                             (index, stack) -> itemHandler.isItemValid(0, stack) || itemHandler.isItemValid(1, stack))));
 
+    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
 
     protected final ContainerData data; //  This field is responsible for carrying data generated via ticking for display on the GUI later.
     private int progress = 0;
@@ -110,25 +127,37 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
         return new BloomeryBlockMenu(id, inventory, this, this.data);
     }
 
+    public IEnergyStorage getEnergyStorage() {
+        return this.ENERGY_STORAGE;
+    }
+
+    public void setEnergyLevel(int energy) {
+        this.ENERGY_STORAGE.setEnergy(energy);
+    }
+
     @Override //    Allows import/export to inventory
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if (cap == ForgeCapabilities.ENERGY) {
+            return this.lazyEnergyHandler.cast();
+        }
+
         if (cap == ForgeCapabilities.ITEM_HANDLER) {
             if (side == null) {
-                return lazyItemHandler.cast();
+                return this.lazyItemHandler.cast();
             }
 
-            if (directionWrappedHandlerMap.containsKey(side)) {
+            if (this.directionWrappedHandlerMap.containsKey(side)) {
                 Direction localDir = this.getBlockState().getValue(BloomeryBlock.FACING);
 
                 if (side == Direction.UP || side == Direction.DOWN) {
-                    return directionWrappedHandlerMap.get(side).cast();
+                    return this.directionWrappedHandlerMap.get(side).cast();
                 }
 
                 return switch (localDir) {
-                    default -> directionWrappedHandlerMap.get(side.getOpposite()).cast();
-                    case EAST -> directionWrappedHandlerMap.get(side.getClockWise()).cast();
-                    case SOUTH -> directionWrappedHandlerMap.get(side).cast();
-                    case WEST -> directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
+                    default -> this.directionWrappedHandlerMap.get(side.getOpposite()).cast();
+                    case EAST -> this.directionWrappedHandlerMap.get(side.getClockWise()).cast();
+                    case SOUTH -> this.directionWrappedHandlerMap.get(side).cast();
+                    case WEST -> this.directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
                 };
             }
         }
@@ -139,19 +168,22 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     @Override //    ?
     public void onLoad() {
         super.onLoad();
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
+        this.lazyItemHandler = LazyOptional.of(() -> this.itemHandler);
+        this.lazyEnergyHandler = LazyOptional.of(() -> this.ENERGY_STORAGE);
     }
 
     @Override //    ?
     public void invalidateCaps() {
         super.invalidateCaps();
-        lazyItemHandler.invalidate();
+        this.lazyItemHandler.invalidate();
+        this.lazyEnergyHandler.invalidate();
     }
 
     @Override   //  Saves inventory
     protected void saveAdditional(CompoundTag nbt) {
         nbt.put("inventory", itemHandler.serializeNBT());
-        nbt.putInt("bloomery_progress", this.progress);
+        nbt.putInt("bloomery.progress", this.progress);
+        nbt.putInt("bloomery.energy", this.ENERGY_STORAGE.getEnergyStored());
 
         super.saveAdditional(nbt);
     }
@@ -160,7 +192,8 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     public void load(CompoundTag nbt) {
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
-        this.progress = nbt.getInt("bloomery_progress");
+        this.progress = nbt.getInt("bloomery.progress");
+        this.ENERGY_STORAGE.setEnergy(nbt.getInt("bloomery.energy"));
     }
 
     //  Called inside of block class when destroyed so that inventory drops
@@ -175,8 +208,13 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, BloomeryBlockEntity bloomeryBlockEntity) {
         if (!level.isClientSide()) {
-            if (hasRecipe(bloomeryBlockEntity)) {
+            if (hasItemInFirstSlot(bloomeryBlockEntity)) {
+                bloomeryBlockEntity.ENERGY_STORAGE.receiveEnergy(64, false);
+            }
+
+            if (hasRecipe(bloomeryBlockEntity) && hasEnoughEnergy(bloomeryBlockEntity)) {
                 bloomeryBlockEntity.progress++;
+                extractEnergy(bloomeryBlockEntity);
                 setChanged(level, blockPos, blockState); // Causes reload when necessary
 
                 if (bloomeryBlockEntity.progress >= bloomeryBlockEntity.maxProgress) {
@@ -187,6 +225,19 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
                 setChanged(level, blockPos, blockState);
             }
         }
+    }
+
+    private static void extractEnergy(BloomeryBlockEntity bloomeryBlockEntity) {
+        bloomeryBlockEntity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ, false);
+    }
+
+    private static boolean hasEnoughEnergy(BloomeryBlockEntity bloomeryBlockEntity) {
+        return bloomeryBlockEntity.ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQ;
+    }
+
+    // FIXME: hardcoded
+    private static boolean hasItemInFirstSlot(BloomeryBlockEntity bloomeryBlockEntity) {
+        return bloomeryBlockEntity.itemHandler.getStackInSlot(0).getItem() == Items.REDSTONE;
     }
 
     private void resetProgress() {
@@ -228,6 +279,4 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     private static boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
         return inventory.getItem(2).getMaxStackSize() > inventory.getItem(2).getCount();
     }
-
-
 }
