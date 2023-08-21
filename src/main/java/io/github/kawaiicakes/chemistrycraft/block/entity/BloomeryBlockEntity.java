@@ -1,6 +1,7 @@
 package io.github.kawaiicakes.chemistrycraft.block.entity;
 
 import io.github.kawaiicakes.chemistrycraft.block.BloomeryBlock;
+import io.github.kawaiicakes.chemistrycraft.capabilities.WrappedItemHandler;
 import io.github.kawaiicakes.chemistrycraft.recipe.BloomeryRecipe;
 import io.github.kawaiicakes.chemistrycraft.screen.BloomeryBlockMenu;
 import net.minecraft.core.BlockPos;
@@ -56,14 +57,14 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     //  When #getCapability on BloomerBlockEntity is called, this method ensures that the correct sides line up for I/O.
     //  Furthermore, it defines the faces that accept certain I/O.
-    private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
-            Map.of(Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> false)),
-                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (index) -> index == 1,
+    private final Map<Direction, LazyOptional<WrappedItemHandler>> directionWrappedHandlerMap =
+            Map.of(Direction.DOWN, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 2, (i, s) -> false)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (index) -> index == 1,
                             (index, stack) -> itemHandler.isItemValid(1, stack))),
-                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> false)),
-                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1,
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 2, (i, s) -> false)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (i) -> i == 1,
                             (index, stack) -> itemHandler.isItemValid(1, stack))),
-                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (index) -> index == 0 || index == 1,
+                    Direction.WEST, LazyOptional.of(() -> new WrappedItemHandler(itemHandler, (index) -> index == 0 || index == 1,
                             (index, stack) -> itemHandler.isItemValid(0, stack) || itemHandler.isItemValid(1, stack))));
 
 

@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.block.entity;
+package io.github.kawaiicakes.chemistrycraft.capabilities;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -8,17 +8,17 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 /*
- * WrappedHandler by noeppi_noeppi
+ * WrappedItemHandler by noeppi_noeppi
  * under https://github.com/ModdingX/LibX/blob/1.19/LICENSE
  *
  */
-public class WrappedHandler implements IItemHandlerModifiable {
+public class WrappedItemHandler implements IItemHandlerModifiable {
     private final IItemHandlerModifiable handler;
     private final Predicate<Integer> extract;
     private final BiPredicate<Integer, ItemStack> insert;
 
-    public WrappedHandler(IItemHandlerModifiable handler, Predicate<Integer> extract,
-                          BiPredicate<Integer, ItemStack> insert) {
+    public WrappedItemHandler(IItemHandlerModifiable handler, Predicate<Integer> extract,
+                              BiPredicate<Integer, ItemStack> insert) {
         this.handler = handler;
         this.extract = extract;
         this.insert = insert;
