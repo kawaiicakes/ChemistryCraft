@@ -1,5 +1,6 @@
 package io.github.kawaiicakes.chemistrycraft.block.entity;
 
+import io.github.kawaiicakes.chemistrycraft.block.BloomeryBlock;
 import io.github.kawaiicakes.chemistrycraft.recipe.BloomeryRecipe;
 import io.github.kawaiicakes.chemistrycraft.screen.BloomeryBlockMenu;
 import net.minecraft.core.BlockPos;
@@ -25,10 +26,12 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Optional;
 
 import static io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry.BLOOMERY_ENTITY;
-import static io.github.kawaiicakes.chemistrycraft.registry.ItemRegistry.BLOOMERY_ITEM;
+import static net.minecraft.world.item.Items.DIRT;
+import static net.minecraft.world.item.Items.IRON_INGOT;
 
 public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     //  Inventory of the block entity
@@ -37,10 +40,32 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
         protected void onContentsChanged(int slot) {
             setChanged(); //    Reloads chunk/block on change of contents
         }
+
+        @Override // Checks if an item can go into a slot.
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return switch (slot) {
+                case 0 -> stack.getItem() == DIRT; //Leftmost slot here
+                case 1 -> stack.getItem() == IRON_INGOT; //Stuff to smelt goes here
+                case 2 -> false;
+                default -> super.isItemValid(slot, stack);
+            };
+        }
     };
 
     //  Makes inventory available via capabilities
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    //  When #getCapability on BloomerBlockEntity is called, this method ensures that the correct sides line up for I/O.
+    //  Furthermore, it defines the faces that accept certain I/O.
+    private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
+            Map.of(Direction.DOWN, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> false)),
+                    Direction.NORTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (index) -> index == 1,
+                            (index, stack) -> itemHandler.isItemValid(1, stack))),
+                    Direction.SOUTH, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> false)),
+                    Direction.EAST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1,
+                            (index, stack) -> itemHandler.isItemValid(1, stack))),
+                    Direction.WEST, LazyOptional.of(() -> new WrappedHandler(itemHandler, (index) -> index == 0 || index == 1,
+                            (index, stack) -> itemHandler.isItemValid(0, stack) || itemHandler.isItemValid(1, stack))));
+
 
     protected final ContainerData data; //  This field is responsible for carrying data generated via ticking for display on the GUI later.
     private int progress = 0;
@@ -75,7 +100,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("BALLS!!");
+        return Component.literal("Bloomery");
     }
 
     @Nullable
@@ -87,7 +112,24 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     @Override //    Allows import/export to inventory
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
+            if (side == null) {
+                return lazyItemHandler.cast();
+            }
+
+            if (directionWrappedHandlerMap.containsKey(side)) {
+                Direction localDir = this.getBlockState().getValue(BloomeryBlock.FACING);
+
+                if (side == Direction.UP || side == Direction.DOWN) {
+                    return directionWrappedHandlerMap.get(side).cast();
+                }
+
+                return switch (localDir) {
+                    default -> directionWrappedHandlerMap.get(side.getOpposite()).cast();
+                    case EAST -> directionWrappedHandlerMap.get(side.getClockWise()).cast();
+                    case SOUTH -> directionWrappedHandlerMap.get(side).cast();
+                    case WEST -> directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
+                };
+            }
         }
 
         return super.getCapability(cap, side);
