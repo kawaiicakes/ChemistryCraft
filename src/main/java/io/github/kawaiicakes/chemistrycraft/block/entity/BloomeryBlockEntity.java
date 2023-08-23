@@ -221,7 +221,6 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
                     craftItem(bloomeryBlockEntity);
                 }
             } else {
-                bloomeryBlockEntity.resetProgress();
                 setChanged(level, blockPos, blockState);
             }
         }
