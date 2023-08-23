@@ -123,7 +123,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override // FIXME: this isn't displaying anything.
     public Component getDisplayName() {
-        return Component.translatable("bloomery");
+        return Component.translatable("container.bloomery");
     }
 
     @Nullable

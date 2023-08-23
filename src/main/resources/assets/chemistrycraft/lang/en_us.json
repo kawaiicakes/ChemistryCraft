@@ -8,5 +8,5 @@
   "itemGroup.chemistrycraft_ores": "ChemistryCraft Ores",
   "itemGroup.chemistrycraft_minerals": "ChemistryCraft Minerals",
   "bloomery_recipe": "Blooming",
-  "bloomery": "Bloomery"
+  "container.bloomery": "Bloomery"
 }
