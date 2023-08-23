@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry.BLOOMERY_ENTITY;
-import static net.minecraft.world.item.Items.DIRT;
+import static net.minecraft.world.item.Items.REDSTONE;
 import static net.minecraft.world.item.Items.IRON_INGOT;
 
 public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
@@ -50,7 +50,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
         @Override // Checks if an item can go into a slot.
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0 -> stack.getItem() == DIRT; //Leftmost slot here
+                case 0 -> stack.getItem() == REDSTONE; //Leftmost slot here
                 case 1 -> stack.getItem() == IRON_INGOT; //Stuff to smelt goes here
                 case 2 -> false;
                 default -> super.isItemValid(slot, stack);
@@ -116,7 +116,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
         };
     }
 
-    @Override
+    @Override // FIXME: this isn't displaying anything.
     public Component getDisplayName() {
         return Component.translatable("bloomery");
     }
@@ -237,7 +237,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
 
     // FIXME: hardcoded
     private static boolean hasItemInFirstSlot(BloomeryBlockEntity bloomeryBlockEntity) {
-        return bloomeryBlockEntity.itemHandler.getStackInSlot(0).getItem() == Items.REDSTONE;
+        return bloomeryBlockEntity.itemHandler.getStackInSlot(0).getItem() == REDSTONE;
     }
 
     private void resetProgress() {

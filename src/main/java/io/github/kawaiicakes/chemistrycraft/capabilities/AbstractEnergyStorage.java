@@ -5,7 +5,7 @@ import net.minecraftforge.energy.EnergyStorage;
 /**
  * Abstract subclassing of EnergyStorage allows implementation of energy capabilities with the
  * ability to call <code>#onEnergyChanged</code> on change of energy. Subclasses agree to define
- * a custom behaviour when implementing <code>#onEnergyChanged.</code>
+ * a custom behaviour when energy is changed by overriding <code>#onEnergyChanged.</code>
  */
 public abstract class AbstractEnergyStorage extends EnergyStorage {
     public AbstractEnergyStorage(int capacity, int maxTransfer) {
@@ -24,7 +24,7 @@ public abstract class AbstractEnergyStorage extends EnergyStorage {
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
-        int receivedEnergy = super.extractEnergy(maxExtract, simulate);
+        int receivedEnergy = super.receiveEnergy(maxReceive, simulate);
         if (receivedEnergy != 0) {
             onEnergyChanged();
         }
