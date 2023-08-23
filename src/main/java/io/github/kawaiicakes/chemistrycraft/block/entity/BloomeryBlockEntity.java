@@ -20,7 +20,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -40,8 +39,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import static io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry.BLOOMERY_ENTITY;
-import static net.minecraft.world.item.Items.REDSTONE;
 import static net.minecraft.world.item.Items.IRON_INGOT;
+import static net.minecraft.world.item.Items.REDSTONE;
 
 //TODO: extract energy and fluid handling stuff to interfaces?
 public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
@@ -142,7 +141,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     @Override //    Allows import/export to inventory
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+    public <T> @NotNull LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
         if (cap == ForgeCapabilities.ENERGY) {
             return this.lazyEnergyHandler.cast();
         }
@@ -209,6 +208,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
 
+        assert this.level != null;
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
@@ -261,11 +261,12 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
+        assert level != null;
         Optional<BloomeryRecipe> recipe = level.getRecipeManager().getRecipeFor(BloomeryRecipe.Type.INSTANCE, inventory, level);
 
         if (hasRecipe(entity)) {
             entity.itemHandler.extractItem(1, 1, false); // recipe.get().getResultItem().getItem() ignores count for output!
-            entity.itemHandler.setStackInSlot(2, new ItemStack(recipe.get().getResultItem().getItem(),
+            entity.itemHandler.setStackInSlot(2, new ItemStack(recipe.orElseThrow().getResultItem().getItem(),
                     entity.itemHandler.getStackInSlot(2).getCount() + 1));
 
             entity.resetProgress();
@@ -279,6 +280,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
+        assert level != null;
         Optional<BloomeryRecipe> recipe = level.getRecipeManager().getRecipeFor(BloomeryRecipe.Type.INSTANCE, inventory, level);
 
         return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) && canInsertItemIntoOutputSlot(inventory, recipe.get().getResultItem());

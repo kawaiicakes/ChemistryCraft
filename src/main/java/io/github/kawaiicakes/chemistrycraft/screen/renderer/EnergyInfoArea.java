@@ -32,7 +32,7 @@ public class EnergyInfoArea extends InfoArea {
     }
 
     public List<Component> getTooltips() {
-        return List.of(Component.literal(energy.getEnergyStored()+"/"+energy.getMaxEnergyStored()+" FE"));
+        return List.of(Component.literal(energy.getEnergyStored()+"/"+energy.getMaxEnergyStored()+" J"));
     }
 
     @Override

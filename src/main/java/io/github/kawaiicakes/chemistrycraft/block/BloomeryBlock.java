@@ -25,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry.BLOOMERY_ENTITY;
 
+@SuppressWarnings("deprecation")
 public class BloomeryBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
