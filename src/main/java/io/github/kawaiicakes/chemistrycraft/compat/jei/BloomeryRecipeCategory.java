@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 
 import static io.github.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID;
 
+//TODO: add energy/pressure requirements to JEI
 public class BloomeryRecipeCategory implements IRecipeCategory<BloomeryRecipe> {
     public final static ResourceLocation UID = new ResourceLocation(MOD_ID, "blooming");
     public final static ResourceLocation TEXTURE = new ResourceLocation(MOD_ID, "textures/gui/bloomery_gui.png");
