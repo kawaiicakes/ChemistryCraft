@@ -118,7 +118,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Bloomery");
+        return Component.translatable("bloomery");
     }
 
     @Nullable

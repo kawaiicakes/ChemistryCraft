@@ -6,5 +6,7 @@
   "block.chemistrycraft.bloomery": "Bloomery",
 
   "itemGroup.chemistrycraft_ores": "ChemistryCraft Ores",
-  "itemGroup.chemistrycraft_minerals": "ChemistryCraft Minerals"
+  "itemGroup.chemistrycraft_minerals": "ChemistryCraft Minerals",
+  "bloomery_recipe": "Bloomery",
+  "bloomery": "Bloomery"
 }
