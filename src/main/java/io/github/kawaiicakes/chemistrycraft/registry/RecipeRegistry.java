@@ -14,7 +14,7 @@ public class RecipeRegistry {
             DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MOD_ID);
 
     public static final RegistryObject<RecipeSerializer<BloomeryRecipe>> BLOOMERY_RECIPE_SERIALIZER =
-            SERIALIZERS.register("bloomery", () -> BloomeryRecipe.Serializer.INSTANCE);
+            SERIALIZERS.register("blooming", () -> BloomeryRecipe.Serializer.INSTANCE);
 
     public static void register(IEventBus bus) {
         SERIALIZERS.register(bus);

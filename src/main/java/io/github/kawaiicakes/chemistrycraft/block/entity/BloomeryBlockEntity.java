@@ -245,15 +245,16 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     private static void craftItem(BloomeryBlockEntity entity) { // Called when item is crafted
         Level level = entity.getLevel();
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots()); //  makes inventory to make life easier
-        for (int i = 0; i < entity.itemHandler.getSlots(); ++i) {
+        for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
         Optional<BloomeryRecipe> recipe = level.getRecipeManager().getRecipeFor(BloomeryRecipe.Type.INSTANCE, inventory, level);
 
         if (hasRecipe(entity)) {
-            entity.itemHandler.extractItem(1, 1, false); // recipe.get().getResultItem().getItem(); ignores count!
-            entity.itemHandler.setStackInSlot(2, new ItemStack(recipe.get().getResultItem().getItem(), entity.itemHandler.getStackInSlot(2).getCount() + 1));
+            entity.itemHandler.extractItem(1, 1, false); // recipe.get().getResultItem().getItem() ignores count for output!
+            entity.itemHandler.setStackInSlot(2, new ItemStack(recipe.get().getResultItem().getItem(),
+                    entity.itemHandler.getStackInSlot(2).getCount() + 1));
 
             entity.resetProgress();
         }
@@ -262,7 +263,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     private static boolean hasRecipe(BloomeryBlockEntity entity) { // Checks if a valid recipe exists
         Level level = entity.getLevel();
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots()); //  makes inventory to make life easier
-        for (int i = 0; i < entity.itemHandler.getSlots(); ++i) {
+        for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 

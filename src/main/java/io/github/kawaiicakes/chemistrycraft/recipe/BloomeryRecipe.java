@@ -25,15 +25,19 @@ public class BloomeryRecipe implements Recipe<SimpleContainer> {
         this.recipeItems = recipeItems;
     }
 
-
     @Override // If returns true, then crafting may proceed. A recipe's functions are generally dependent on this
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
-        if (pLevel.isClientSide) {
+        if (pLevel.isClientSide) { // This line is necessary for some reason...
             return false;
         }
 
         //  Checks for equality from recipe to item in respective slot
         return recipeItems.get(0).test(pContainer.getItem(1));
+    }
+
+    @Override // this is necessary to override for JEI compatibility
+    public NonNullList<Ingredient> getIngredients() {
+        return this.recipeItems;
     }
 
     @Override
@@ -70,12 +74,12 @@ public class BloomeryRecipe implements Recipe<SimpleContainer> {
     public static class Type implements RecipeType<BloomeryRecipe> {
         private Type() {}
         public static final Type INSTANCE = new Type();
-        public static final String ID = "bloomery";
+        public static final String ID = "blooming";
     }
 
     public static class Serializer implements RecipeSerializer<BloomeryRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID = new ResourceLocation(MOD_ID, "bloomery");
+        public static final ResourceLocation ID = new ResourceLocation(MOD_ID, "blooming");
 
         @Override // Parses a recipe from JSON. Check vanilla implementation of RecipeSerializer to get better idea of what to do
         public BloomeryRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
