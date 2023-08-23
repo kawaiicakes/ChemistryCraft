@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -23,10 +24,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
@@ -39,6 +43,7 @@ import static io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry.
 import static net.minecraft.world.item.Items.REDSTONE;
 import static net.minecraft.world.item.Items.IRON_INGOT;
 
+//TODO: extract energy and fluid handling stuff to interfaces?
 public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     //  Inventory of the block entity
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
@@ -91,6 +96,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
 
     public BloomeryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(BLOOMERY_ENTITY.get(), blockPos, blockState);
+        MinecraftForge.EVENT_BUS.register(this); //TODO: check that this isn't unnecessarily laggy for what it offers. (currently, only packet sync on player join)
         this.data = new ContainerData() {
             @Override
             public int get(int index) { //  'Saves' these values into our ContainerData
@@ -224,6 +230,12 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
                 setChanged(level, blockPos, blockState);
             }
         }
+    }
+
+    // TODO: extract method to an interface? (PacketSync interface to ensure packets are always synced?)
+    @SubscribeEvent
+    public void forcePackets(PlayerEvent.PlayerLoggedInEvent event) {
+        ChemistryPackets.sendToPlayer(new EnergyS2CPacket(this.ENERGY_STORAGE.getEnergyStored(), getBlockPos()), (ServerPlayer) event.getEntity());
     }
 
     private static void extractEnergy(BloomeryBlockEntity bloomeryBlockEntity) {
