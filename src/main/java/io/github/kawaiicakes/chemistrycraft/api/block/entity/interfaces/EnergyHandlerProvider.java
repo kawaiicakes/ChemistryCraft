@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.api.block.entity;
+package io.github.kawaiicakes.chemistrycraft.api.block.entity.interfaces;
 
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -8,6 +8,11 @@ import net.minecraftforge.energy.IEnergyStorage;
  */
 public interface EnergyHandlerProvider {
     IEnergyStorage getEnergyStorage();
+
+    /**
+     * Returns the energy consumed by this per tick.
+     * @return The energy as an <code>int</code> consumed by the implementing class per tick.
+     */
     int getEnergyConsumptionPerTick();
     LazyOptional<IEnergyStorage> getLazyEnergyHandler();
     void setLazyEnergyHandler(LazyOptional<?> energyHandler);
