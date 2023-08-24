@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.api.block.entity.interfaces;
+package io.github.kawaiicakes.chemistrycraft.api.block.entity;
 
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;

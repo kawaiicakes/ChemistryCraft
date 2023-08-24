@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.api.block.entity.interfaces;
+package io.github.kawaiicakes.chemistrycraft.api.block.entity;
 
 import io.github.kawaiicakes.chemistrycraft.api.capabilities.ITemperatureHandler;
 import net.minecraftforge.common.util.LazyOptional;
