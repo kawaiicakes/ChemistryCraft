@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.energy;
+package io.github.kawaiicakes.chemistrycraft.api.capabilities;
 
 import net.minecraftforge.energy.EnergyStorage;
 

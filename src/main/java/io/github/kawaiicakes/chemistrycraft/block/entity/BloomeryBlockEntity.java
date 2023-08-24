@@ -1,8 +1,8 @@
 package io.github.kawaiicakes.chemistrycraft.block.entity;
 
 import io.github.kawaiicakes.chemistrycraft.block.BloomeryBlock;
-import io.github.kawaiicakes.chemistrycraft.energy.AbstractEnergyStorage;
-import io.github.kawaiicakes.chemistrycraft.capabilities.WrappedItemHandler;
+import io.github.kawaiicakes.chemistrycraft.api.capabilities.AbstractEnergyStorage;
+import io.github.kawaiicakes.chemistrycraft.api.capabilities.WrappedItemHandler;
 import io.github.kawaiicakes.chemistrycraft.network.ChemistryPackets;
 import io.github.kawaiicakes.chemistrycraft.network.SyncedEntity;
 import io.github.kawaiicakes.chemistrycraft.network.packets.EnergyS2CPacket;

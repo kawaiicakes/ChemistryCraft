@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.capabilities;
+package io.github.kawaiicakes.chemistrycraft.api.capabilities;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
