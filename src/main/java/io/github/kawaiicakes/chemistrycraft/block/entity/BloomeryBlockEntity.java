@@ -4,6 +4,7 @@ import io.github.kawaiicakes.chemistrycraft.block.BloomeryBlock;
 import io.github.kawaiicakes.chemistrycraft.energy.AbstractEnergyStorage;
 import io.github.kawaiicakes.chemistrycraft.capabilities.WrappedItemHandler;
 import io.github.kawaiicakes.chemistrycraft.network.ChemistryPackets;
+import io.github.kawaiicakes.chemistrycraft.network.SyncedEntity;
 import io.github.kawaiicakes.chemistrycraft.network.packets.EnergyS2CPacket;
 import io.github.kawaiicakes.chemistrycraft.recipe.BloomeryRecipe;
 import io.github.kawaiicakes.chemistrycraft.screen.BloomeryBlockMenu;
@@ -42,13 +43,13 @@ import static io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry.
 import static net.minecraft.world.item.Items.IRON_INGOT;
 import static net.minecraft.world.item.Items.REDSTONE;
 
-//TODO: extract energy and fluid handling stuff to interfaces?
-public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
+//TODO: extract fluid handling to interface?
+public class BloomeryBlockEntity extends BlockEntity implements MenuProvider, SyncedEntity {
     //  Inventory of the block entity
     private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
-        @Override
+        @Override //This method marks the capability as 'dirty'; see Forge docs
         protected void onContentsChanged(int slot) {
-            setChanged(); //    Reloads chunk/block on change of contents
+            setChanged(); //    Reloads chunk/block on change of contents.
         }
 
         @Override // Checks if an item can go into a slot.
@@ -65,7 +66,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     // Referenced in #getCapability
     private final AbstractEnergyStorage ENERGY_STORAGE = new AbstractEnergyStorage(60000, 256) {
         @Override
-        public void onEnergyChanged() {
+        public void onEnergyChanged() { //marks as dirty
             setChanged(); //    Forces chunk to save later
             ChemistryPackets.sendToClients(new EnergyS2CPacket(this.energy, getBlockPos()));
         }
@@ -95,10 +96,11 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
 
     public BloomeryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(BLOOMERY_ENTITY.get(), blockPos, blockState);
+        // FIXME: this can probably be replaced by using a static event handler calling a static helper method
         MinecraftForge.EVENT_BUS.register(this); //TODO: check that this isn't unnecessarily laggy for what it offers. (currently, only packet sync on player join)
         this.data = new ContainerData() {
             @Override
-            public int get(int index) { //  'Saves' these values into our ContainerData
+            public int get(int index) { //  'Gets' these values from our ContainerData
                 return switch (index) {
                     case 0 -> BloomeryBlockEntity.this.progress;
                     case 1 -> BloomeryBlockEntity.this.maxProgress;
@@ -127,7 +129,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     @Nullable
-    @Override //    renders GUI when called
+    @Override //    renders GUI when called TODO: packet sync here? but that wouldn't fix problems w/ WAILA
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
         return new BloomeryBlockMenu(id, inventory, this, this.data);
     }
@@ -140,7 +142,7 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
         this.ENERGY_STORAGE.setEnergy(energy);
     }
 
-    @Override //    Allows import/export to inventory
+    @Override //    Allows import/export to appropriate inventory
     public <T> @NotNull LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
         if (cap == ForgeCapabilities.ENERGY) {
             return this.lazyEnergyHandler.cast();
@@ -170,14 +172,14 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
         return super.getCapability(cap, side);
     }
 
-    @Override //    ?
+    @Override //    Called when first added to world or prior to the first tick when generating chunk or loading from disk
     public void onLoad() {
         super.onLoad();
         this.lazyItemHandler = LazyOptional.of(() -> this.itemHandler);
         this.lazyEnergyHandler = LazyOptional.of(() -> this.ENERGY_STORAGE);
     }
 
-    @Override //    ?
+    @Override //    Called when block entity is unloaded
     public void invalidateCaps() {
         super.invalidateCaps();
         this.lazyItemHandler.invalidate();
@@ -232,12 +234,20 @@ public class BloomeryBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
-    // TODO: extract method to an interface? (PacketSync interface to ensure packets are always synced?)
+    @Override
     @SubscribeEvent
-    public void forcePackets(PlayerEvent.PlayerLoggedInEvent event) {
+    public void syncPacketsOnConnect(PlayerEvent.PlayerLoggedInEvent event) {
         ChemistryPackets.sendToPlayer(new EnergyS2CPacket(this.ENERGY_STORAGE.getEnergyStored(), getBlockPos()), (ServerPlayer) event.getEntity());
     }
 
+    /*
+        Helper methods below this line. Should probably be abstracted in an abstract class as opposed to an interface
+     */
+
+    /**
+     * Static helper method allowing a specific instance of this class to be referenced inside the static tick method.
+     * @param bloomeryBlockEntity   the instance of this class being ticked.
+     */
     private static void extractEnergy(BloomeryBlockEntity bloomeryBlockEntity) {
         bloomeryBlockEntity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ, false);
     }

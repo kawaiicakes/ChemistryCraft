@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static io.github.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID;
 
+// TODO: make energy requirements data driven?
 public class BloomeryRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output; //  These are used with JEI for identification
