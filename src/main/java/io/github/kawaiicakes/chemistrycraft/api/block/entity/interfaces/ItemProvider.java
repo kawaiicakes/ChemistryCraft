@@ -6,7 +6,7 @@ import net.minecraftforge.items.IItemHandler;
 /**
  * Implementing classes agree to store and handle items.
  */
-public interface ItemHandlerProvider {
+public interface ItemProvider {
     IItemHandler getItemHandler();
     LazyOptional<IItemHandler> getLazyItemHandler();
     void setLazyItemHandler(LazyOptional<?> itemHandler);
