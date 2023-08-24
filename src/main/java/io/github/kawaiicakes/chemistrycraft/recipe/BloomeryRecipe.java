@@ -25,7 +25,7 @@ public class BloomeryRecipe implements Recipe<SimpleContainer> {
         this.recipeItems = recipeItems;
     }
 
-    @Override // If returns true, then crafting may proceed. A recipe's functions are generally dependent on this
+    @Override // If returns true, then crafting may proceed. A recipe's functionality is generally dependent on this
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         if (pLevel.isClientSide) { // This line is necessary for some reason...
             return false;
