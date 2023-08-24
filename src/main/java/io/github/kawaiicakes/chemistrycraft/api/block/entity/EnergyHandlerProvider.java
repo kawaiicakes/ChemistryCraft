@@ -10,6 +10,6 @@ public interface EnergyHandlerProvider {
     IEnergyStorage getEnergyStorage();
     int getEnergyConsumptionPerTick();
     LazyOptional<IEnergyStorage> getLazyEnergyHandler();
-    void setLazyEnergyHandler();
+    void setLazyEnergyHandler(LazyOptional<?> energyHandler);
     void setEnergyLevel(int energy);
 }
