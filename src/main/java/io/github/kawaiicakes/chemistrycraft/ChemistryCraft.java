@@ -73,11 +73,7 @@ public class ChemistryCraft
         MinecraftForge.EVENT_BUS.register(this);
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        BlockEntityRegistry.register(modEventBus);
-        BlockRegistry.register(modEventBus);
-        ItemRegistry.register(modEventBus);
-        MenuRegistry.register(modEventBus);
-        RecipeRegistry.register(modEventBus);
+        ChemistryCraftRegistry.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
     }
