@@ -26,8 +26,4 @@ public class BlockRegistry {
         BLOCK_REGISTRY.register(name, block);
         ItemRegistry.ITEM_REGISTRY.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
-
-    public static void register(IEventBus bus) {
-        BLOCK_REGISTRY.register(bus);
-    }
 }
