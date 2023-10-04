@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package io.github.kawaiicakes.chemistrycraft.block.entity;
+package io.github.kawaiicakes.chemistrycraft.registry.block.entity;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import javax.annotation.ParametersAreNonnullByDefault;

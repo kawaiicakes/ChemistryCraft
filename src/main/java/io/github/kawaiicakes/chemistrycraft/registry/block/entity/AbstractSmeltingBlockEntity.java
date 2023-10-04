@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.block.entity;
+package io.github.kawaiicakes.chemistrycraft.registry.block.entity;
 
 import io.github.kawaiicakes.chemistrycraft.api.block.entity.ItemProvider;
 import io.github.kawaiicakes.chemistrycraft.api.block.entity.OxygenProvider;

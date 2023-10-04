@@ -1,6 +1,6 @@
-package io.github.kawaiicakes.chemistrycraft.block;
+package io.github.kawaiicakes.chemistrycraft.registry.block;
 
-import io.github.kawaiicakes.chemistrycraft.block.entity.BloomeryBlockEntity;
+import io.github.kawaiicakes.chemistrycraft.registry.block.entity.BloomeryBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
