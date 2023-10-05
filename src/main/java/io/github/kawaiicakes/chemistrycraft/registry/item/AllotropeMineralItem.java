@@ -2,8 +2,12 @@ package io.github.kawaiicakes.chemistrycraft.registry.item;
 
 import com.smashingmods.chemlib.api.Element;
 import com.smashingmods.chemlib.api.MetalType;
+import com.smashingmods.chemlib.client.AbbreviationRenderer;
 import com.smashingmods.chemlib.common.items.ElementItem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -21,12 +25,15 @@ public class AllotropeMineralItem extends MineralItem<ElementItem> implements El
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-
+        pTooltipComponents.add(MutableComponent.create(new LiteralContents(String.format("%s (%d)", this.getAbbreviation(), this.getAtomicNumber()))).withStyle(ChatFormatting.AQUA));
+        if (!this.getGroupName().isEmpty()) {
+            pTooltipComponents.add(MutableComponent.create(new LiteralContents(this.getGroupName())).withStyle(ChatFormatting.GRAY));
+        }
     }
 
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-
+        consumer.accept(AbbreviationRenderer.RENDERER);
     }
 
     @Override
