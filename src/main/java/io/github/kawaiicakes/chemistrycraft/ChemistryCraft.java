@@ -2,6 +2,7 @@ package io.github.kawaiicakes.chemistrycraft;
 
 import com.mojang.logging.LogUtils;
 import io.github.kawaiicakes.chemistrycraft.network.ChemistryPackets;
+import io.github.kawaiicakes.chemistrycraft.registry.*;
 import io.github.kawaiicakes.chemistrycraft.screen.BloomeryBlockScreen;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -71,6 +72,12 @@ public class ChemistryCraft
     {
         MinecraftForge.EVENT_BUS.register(this);
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        BlockEntityRegistry.BLOCK_ENTITY_REGISTRY.register(modEventBus);
+        BlockRegistry.BLOCK_REGISTRY.register(modEventBus);
+        ItemRegistry.ITEM_REGISTRY.register(modEventBus);
+        MenuRegistry.MENU_REGISTRY.register(modEventBus);
+        RecipeRegistry.RECIPE_REGISTRY.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
     }
