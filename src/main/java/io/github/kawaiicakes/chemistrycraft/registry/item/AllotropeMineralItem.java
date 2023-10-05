@@ -74,7 +74,7 @@ public class AllotropeMineralItem extends MineralItem<ElementItem> implements El
     // TODO: #calculateAbbreviation static method call here
     @Override
     public String getAbbreviation() {
-        return this.phase + "-" + this.parent.getAbbreviation();
+        return this.phase != null ? this.phase + "-" + this.parent.getAbbreviation() : this.parent.getAbbreviation();
     }
 
     @Override
