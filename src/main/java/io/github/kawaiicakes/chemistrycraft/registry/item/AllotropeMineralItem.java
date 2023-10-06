@@ -132,7 +132,7 @@ public class AllotropeMineralItem extends ElementItem implements Mineral {
     }
 
     public static boolean artificial(String parent) {
-        return getJsonObjectByElementName(parent).get("artificial").getAsBoolean();
+        return getJsonObjectByElementName(parent).get("artificial") != null && getJsonObjectByElementName(parent).get("artificial").getAsBoolean();
     }
 
     public static String color(String parent) {
