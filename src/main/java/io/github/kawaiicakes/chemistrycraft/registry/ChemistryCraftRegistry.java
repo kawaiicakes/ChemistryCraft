@@ -24,4 +24,8 @@ public class ChemistryCraftRegistry {
 
         }
     }
+
+    public static void init() {
+        registerMinerals();
+    }
 }
