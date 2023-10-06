@@ -24,7 +24,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item> BLOOMERY_ITEM = REGISTRY_MISC_ITEMS.register("bloomery", () -> new BlockItem(BLOOMERY.get(), new Item.Properties().tab(CreativeModeTab.TAB_REDSTONE)));
 
     public static <T extends Item & Mineral> void registerOre(String name, Supplier<T> mineral) {
-        REGISTRY_RAW_ORE.register(name + "_ore", mineral);
+        REGISTRY_RAW_ORE.register("raw_" + name, mineral);
     }
 
     public static <T extends Item & Mineral> void registerOreBlockItem(T mineral, Item.Properties properties) {
