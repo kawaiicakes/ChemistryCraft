@@ -2,6 +2,7 @@ package io.github.kawaiicakes.chemistrycraft.registry;
 
 import com.smashingmods.chemlib.common.items.ChemicalBlockItem;
 import io.github.kawaiicakes.chemistrycraft.api.Mineral;
+import io.github.kawaiicakes.chemistrycraft.registry.item.AllotropeMineralItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -21,7 +22,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item> BLOOMERY_ITEM = REGISTRY_MISC_ITEMS.register("bloomery", () -> new BlockItem(BLOOMERY.get(), new Item.Properties().tab(CreativeModeTab.TAB_REDSTONE)));
 
     public static <T extends Item & Mineral> void registerOre(T mineral) {
-        REGISTRY_RAW_ORE.register(mineral.getChemicalName(), () -> mineral);
+        REGISTRY_RAW_ORE.register(mineral.getChemicalName() + "_ore", () -> (AllotropeMineralItem) mineral);
     }
 
     public static <T extends Item & Mineral> void registerOreBlockItem(T mineral, Item.Properties properties) {
