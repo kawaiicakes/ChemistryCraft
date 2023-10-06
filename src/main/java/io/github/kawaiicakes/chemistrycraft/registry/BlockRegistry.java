@@ -22,6 +22,6 @@ public class BlockRegistry {
 
     public static <T extends Block> void register(String name, Supplier<T> block) {
         BLOCK_REGISTRY.register(name, block);
-        ItemRegistry.ITEM_REGISTRY.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        ItemRegistry.REGISTRY_MISC_ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 }
