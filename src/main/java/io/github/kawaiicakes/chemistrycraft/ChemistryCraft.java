@@ -75,7 +75,7 @@ public class ChemistryCraft
 
         BlockEntityRegistry.BLOCK_ENTITY_REGISTRY.register(modEventBus);
         BlockRegistry.BLOCK_REGISTRY.register(modEventBus);
-        ItemRegistry.REGISTRY_MISC_ITEMS.register(modEventBus);
+        ItemRegistry.register(modEventBus);
         MenuRegistry.MENU_REGISTRY.register(modEventBus);
         RecipeRegistry.RECIPE_REGISTRY.register(modEventBus);
 
