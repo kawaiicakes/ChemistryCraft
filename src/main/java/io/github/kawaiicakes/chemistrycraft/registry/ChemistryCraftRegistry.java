@@ -16,7 +16,7 @@ public class ChemistryCraftRegistry {
             String description = obj.get("description").getAsString();
             String parent = obj.get("parent").getAsString();
 
-            ItemRegistry.registerOre(new AllotropeMineralItem(name, phase, description, parent));
+            ItemRegistry.registerOre(name, () -> new AllotropeMineralItem(name, phase, description, parent));
         }
 
         for (JsonElement jsonElement : MINERALS.getAsJsonArray("non_allotropes")) {
