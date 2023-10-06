@@ -2,13 +2,8 @@ package io.github.kawaiicakes.chemistrycraft.registry;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.smashingmods.chemlib.common.items.ElementItem;
 import io.github.kawaiicakes.chemistrycraft.registry.item.AllotropeMineralItem;
-import net.minecraft.world.item.Item;
 
-import java.util.Optional;
-
-import static com.smashingmods.chemlib.registry.ItemRegistry.getElementByName;
 import static com.smashingmods.chemlib.registry.Registry.getStreamAsJsonObject;
 
 public class ChemistryCraftRegistry {
