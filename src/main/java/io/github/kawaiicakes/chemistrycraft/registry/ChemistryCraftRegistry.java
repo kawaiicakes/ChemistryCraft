@@ -2,12 +2,12 @@ package io.github.kawaiicakes.chemistrycraft.registry;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.smashingmods.chemlib.registry.ChemicalRegistry;
 import io.github.kawaiicakes.chemistrycraft.ChemistryCraft;
 import io.github.kawaiicakes.chemistrycraft.registry.item.AllotropeMineralItem;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.smashingmods.chemlib.registry.ChemicalRegistry.COMPOUNDS_JSON;
 import static com.smashingmods.chemlib.registry.ChemicalRegistry.ELEMENTS_JSON;
 
 public class ChemistryCraftRegistry {
@@ -37,6 +37,16 @@ public class ChemistryCraftRegistry {
     public static JsonObject getJsonObjectByElementName(String pName) {
         AtomicReference<JsonObject> toReturn = new AtomicReference<>();
         ELEMENTS_JSON.getAsJsonArray("elements").forEach(jsonElement -> {
+            if (jsonElement.getAsJsonObject().get("name").getAsString().equals(pName)) {
+                toReturn.set(jsonElement.getAsJsonObject());
+            }
+        });
+        return toReturn.get();
+    }
+
+    public static JsonObject getJsonObjectByCompoundName(String pName) {
+        AtomicReference<JsonObject> toReturn = new AtomicReference<>();
+        COMPOUNDS_JSON.getAsJsonArray("elements").forEach(jsonElement -> {
             if (jsonElement.getAsJsonObject().get("name").getAsString().equals(pName)) {
                 toReturn.set(jsonElement.getAsJsonObject());
             }
