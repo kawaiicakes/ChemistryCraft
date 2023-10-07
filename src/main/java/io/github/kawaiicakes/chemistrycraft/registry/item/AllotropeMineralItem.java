@@ -21,12 +21,16 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
+
+import static io.github.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID_TEXT_STYLE;
+import static io.github.kawaiicakes.chemistrycraft.registry.ChemistryCraftRegistry.getJsonObjectByElementName;
 
 public class AllotropeMineralItem extends ElementItem implements Mineral {
     private final String allotropeName;
@@ -59,6 +63,7 @@ public class AllotropeMineralItem extends ElementItem implements Mineral {
         if (!this.getGroupName().isEmpty()) {
             pTooltipComponents.add(MutableComponent.create(new LiteralContents(this.getGroupName())).withStyle(ChatFormatting.GRAY));
         }
+        pTooltipComponents.add(MutableComponent.create(new LiteralContents(StringUtils.capitalize(this.getNamespace()))).withStyle(MOD_ID_TEXT_STYLE));
     }
 
     @Override
@@ -101,14 +106,8 @@ public class AllotropeMineralItem extends ElementItem implements Mineral {
         return this.parentChemical;
     }
 
-    public static JsonObject getJsonObjectByElementName(String pName) {
-        AtomicReference<JsonObject> toReturn = new AtomicReference<>();
-        ChemicalRegistry.ELEMENTS_JSON.getAsJsonArray("elements").forEach(jsonElement -> {
-            if (jsonElement.getAsJsonObject().get("name").getAsString().equals(pName)) {
-                toReturn.set(jsonElement.getAsJsonObject());
-            }
-        });
-        return toReturn.get();
+    public String getNamespace() {
+        return ForgeRegistries.ITEMS.getResourceKey(this).orElseThrow().location().getNamespace();
     }
 
     public static int atomicNumber(String parent) {
