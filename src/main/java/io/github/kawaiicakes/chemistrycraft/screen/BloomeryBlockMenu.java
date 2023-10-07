@@ -1,6 +1,6 @@
 package io.github.kawaiicakes.chemistrycraft.screen;
 
-import io.github.kawaiicakes.chemistrycraft.init.registry.block.entity.BloomeryBlockEntity;
+import io.github.kawaiicakes.chemistrycraft.api.block.entity.BloomeryBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

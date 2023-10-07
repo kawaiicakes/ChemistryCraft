@@ -1,6 +1,6 @@
 package io.github.kawaiicakes.chemistrycraft.init.registry;
 
-import io.github.kawaiicakes.chemistrycraft.init.registry.block.entity.BloomeryBlockEntity;
+import io.github.kawaiicakes.chemistrycraft.api.block.entity.BloomeryBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

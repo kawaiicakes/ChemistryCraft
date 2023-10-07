@@ -3,8 +3,8 @@ package io.github.kawaiicakes.chemistrycraft.init.registry;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.github.kawaiicakes.chemistrycraft.ChemistryCraft;
-import io.github.kawaiicakes.chemistrycraft.init.registry.item.AllotropeMineralItem;
-import io.github.kawaiicakes.chemistrycraft.init.registry.item.NonAllotropeMineralItem;
+import io.github.kawaiicakes.chemistrycraft.api.item.AllotropeMineralItem;
+import io.github.kawaiicakes.chemistrycraft.api.item.NonAllotropeMineralItem;
 
 import java.util.concurrent.atomic.AtomicReference;
 

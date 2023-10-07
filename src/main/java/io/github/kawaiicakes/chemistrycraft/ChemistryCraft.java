@@ -3,7 +3,6 @@ package io.github.kawaiicakes.chemistrycraft;
 import com.mojang.logging.LogUtils;
 import io.github.kawaiicakes.chemistrycraft.init.registry.*;
 import io.github.kawaiicakes.chemistrycraft.network.ChemistryPackets;
-import io.github.kawaiicakes.chemistrycraft.registry.*;
 import io.github.kawaiicakes.chemistrycraft.screen.BloomeryBlockScreen;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.MenuScreens;

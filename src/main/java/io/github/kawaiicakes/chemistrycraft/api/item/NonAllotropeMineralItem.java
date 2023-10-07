@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.init.registry.item;
+package io.github.kawaiicakes.chemistrycraft.api.item;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
