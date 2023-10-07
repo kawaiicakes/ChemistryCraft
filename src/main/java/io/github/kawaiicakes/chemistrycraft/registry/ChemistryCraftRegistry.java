@@ -53,7 +53,7 @@ public class ChemistryCraftRegistry {
 
     public static JsonObject getJsonObjectByCompoundName(String pName) {
         AtomicReference<JsonObject> toReturn = new AtomicReference<>();
-        COMPOUNDS_JSON.getAsJsonArray("elements").forEach(jsonElement -> {
+        COMPOUNDS_JSON.getAsJsonArray("compounds").forEach(jsonElement -> {
             if (jsonElement.getAsJsonObject().get("name").getAsString().equals(pName)) {
                 toReturn.set(jsonElement.getAsJsonObject());
             }
