@@ -90,13 +90,8 @@ public class AllotropeMineralItem extends ElementItem implements Mineral {
     }
 
     @Override
-    public int getColor() {
-        return super.getColor();
-    }
-
-    @Override
     public @Nullable String getPhase() {
-        return null;
+        return this.phase;
     }
 
     @Override
