@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.github.kawaiicakes.chemistrycraft.ChemistryCraft;
 import io.github.kawaiicakes.chemistrycraft.registry.item.AllotropeMineralItem;
+import io.github.kawaiicakes.chemistrycraft.registry.item.NonAllotropeMineralItem;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -25,7 +26,13 @@ public class ChemistryCraftRegistry {
         }
 
         for (JsonElement jsonElement : MINERALS.getAsJsonArray("non_allotropes")) {
+            JsonObject obj = jsonElement.getAsJsonObject();
+            String name = obj.get("name").getAsString();
+            String phase = obj.get("phase").getAsString().isEmpty() ? null : obj.get("phase").getAsString();
+            String description = obj.get("description").getAsString();
+            String parent = obj.get("parent").getAsString();
 
+            ItemRegistry.registerOre(name, () -> new NonAllotropeMineralItem(name, phase, description, parent));
         }
     }
 
