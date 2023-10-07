@@ -1,13 +1,12 @@
 {
   "allotropes": [
+  ],
+  "non_allotropes": [
     {
       "name": "hematite",
       "phase": "α",
       "description": "test",
-      "parent": "iron"
+      "parent": "iron_oxide"
     }
-  ],
-  "non_allotropes": [
-
   ]
 }
