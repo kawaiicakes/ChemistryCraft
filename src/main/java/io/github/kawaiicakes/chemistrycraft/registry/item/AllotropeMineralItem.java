@@ -7,7 +7,6 @@ import com.smashingmods.chemlib.api.MatterState;
 import com.smashingmods.chemlib.api.MetalType;
 import com.smashingmods.chemlib.client.AbbreviationRenderer;
 import com.smashingmods.chemlib.common.items.ElementItem;
-import com.smashingmods.chemlib.registry.ChemicalRegistry;
 import io.github.kawaiicakes.chemistrycraft.api.Mineral;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -26,7 +25,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
 import static io.github.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID_TEXT_STYLE;
