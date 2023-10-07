@@ -62,13 +62,13 @@ public class AllotropeMineralItem extends ElementItem implements Mineral {
     }
 
     @Override
-    public String getChemicalName() {
-        return this.allotropeName;
+    public String getAbbreviation() {
+        return this.phase != null ? this.phase + "-" + super.getAbbreviation() : super.getAbbreviation();
     }
 
     @Override
-    public String getAbbreviation() {
-        return this.phase != null ? this.phase + "-" + super.getAbbreviation() : super.getAbbreviation();
+    public String getChemicalName() {
+        return this.allotropeName;
     }
 
     @Override
@@ -77,12 +77,7 @@ public class AllotropeMineralItem extends ElementItem implements Mineral {
     }
 
     @Override
-    public List<MobEffectInstance> getEffects() {
-        return super.getEffects();
-    }
-
-    @Override
-    public @Nullable String getPhase() {
+    public String getPhase() {
         return this.phase;
     }
 

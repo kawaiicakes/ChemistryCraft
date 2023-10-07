@@ -62,17 +62,17 @@ public class NonAllotropeMineralItem extends CompoundItem implements Mineral {
     }
 
     @Override
-    public String getAbbreviation() {
-        return this.phase != null ? this.phase + "-" + super.getAbbreviation() : super.getAbbreviation();
-    }
-
-    @Override
     public String getChemicalDescription() {
         return this.description;
     }
 
     @Override
-    public @Nullable String getPhase() {
+    public String getAbbreviation() {
+        return this.phase != null ? this.phase + "-" + super.getAbbreviation() : super.getAbbreviation();
+    }
+
+    @Override
+    public String getPhase() {
         return this.phase;
     }
 
