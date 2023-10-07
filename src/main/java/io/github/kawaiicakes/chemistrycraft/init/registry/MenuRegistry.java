@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.registry;
+package io.github.kawaiicakes.chemistrycraft.init.registry;
 
 import io.github.kawaiicakes.chemistrycraft.screen.BloomeryBlockMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;

@@ -1,6 +1,6 @@
-package io.github.kawaiicakes.chemistrycraft.registry.block.entity;
+package io.github.kawaiicakes.chemistrycraft.init.registry.block.entity;
 
-import io.github.kawaiicakes.chemistrycraft.registry.block.BloomeryBlock;
+import io.github.kawaiicakes.chemistrycraft.init.registry.block.BloomeryBlock;
 import io.github.kawaiicakes.chemistrycraft.api.capabilities.AbstractEnergyStorage;
 import io.github.kawaiicakes.chemistrycraft.api.capabilities.WrappedItemHandler;
 import io.github.kawaiicakes.chemistrycraft.network.ChemistryPackets;
@@ -39,7 +39,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 import java.util.Optional;
 
-import static io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry.BLOOMERY_ENTITY;
+import static io.github.kawaiicakes.chemistrycraft.init.registry.BlockEntityRegistry.BLOOMERY_ENTITY;
 import static net.minecraft.world.item.Items.IRON_INGOT;
 import static net.minecraft.world.item.Items.REDSTONE;
 

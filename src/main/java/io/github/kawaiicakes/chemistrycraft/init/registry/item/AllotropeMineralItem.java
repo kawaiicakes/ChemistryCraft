@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.registry.item;
+package io.github.kawaiicakes.chemistrycraft.init.registry.item;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -7,6 +7,7 @@ import com.smashingmods.chemlib.api.MatterState;
 import com.smashingmods.chemlib.api.MetalType;
 import com.smashingmods.chemlib.common.items.ElementItem;
 import io.github.kawaiicakes.chemistrycraft.api.Mineral;
+import io.github.kawaiicakes.chemistrycraft.init.registry.ChemistryCraftRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -25,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static io.github.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID_TEXT_STYLE;
-import static io.github.kawaiicakes.chemistrycraft.registry.ChemistryCraftRegistry.getJsonObjectByElementName;
 
 public class AllotropeMineralItem extends ElementItem implements Mineral {
     private final String allotropeName;
@@ -44,7 +44,7 @@ public class AllotropeMineralItem extends ElementItem implements Mineral {
                 metalType(parentChemical),
                 artificial(parentChemical),
                 color(parentChemical),
-                mobEffectsFactory(getJsonObjectByElementName(parentChemical))
+                mobEffectsFactory(ChemistryCraftRegistry.getJsonObjectByElementName(parentChemical))
         );
         this.allotropeName = allotropeName;
         this.phase = phase;
@@ -91,31 +91,31 @@ public class AllotropeMineralItem extends ElementItem implements Mineral {
     }
 
     public static int atomicNumber(String parent) {
-        return getJsonObjectByElementName(parent).get("atomic_number").getAsInt();
+        return ChemistryCraftRegistry.getJsonObjectByElementName(parent).get("atomic_number").getAsInt();
     }
 
     public static String abbreviation(String parent) {
-        return getJsonObjectByElementName(parent).get("abbreviation").getAsString();
+        return ChemistryCraftRegistry.getJsonObjectByElementName(parent).get("abbreviation").getAsString();
     }
 
     public static int group(String parent) {
-        return getJsonObjectByElementName(parent).get("group").getAsInt();
+        return ChemistryCraftRegistry.getJsonObjectByElementName(parent).get("group").getAsInt();
     }
 
     public static int period(String parent) {
-        return getJsonObjectByElementName(parent).get("period").getAsInt();
+        return ChemistryCraftRegistry.getJsonObjectByElementName(parent).get("period").getAsInt();
     }
 
     public static MetalType metalType(String parent) {
-        return MetalType.valueOf(getJsonObjectByElementName(parent).get("metal_type").getAsString().toUpperCase());
+        return MetalType.valueOf(ChemistryCraftRegistry.getJsonObjectByElementName(parent).get("metal_type").getAsString().toUpperCase());
     }
 
     public static boolean artificial(String parent) {
-        return getJsonObjectByElementName(parent).get("artificial") != null && getJsonObjectByElementName(parent).get("artificial").getAsBoolean();
+        return ChemistryCraftRegistry.getJsonObjectByElementName(parent).get("artificial") != null && ChemistryCraftRegistry.getJsonObjectByElementName(parent).get("artificial").getAsBoolean();
     }
 
     public static String color(String parent) {
-        return getJsonObjectByElementName(parent).get("color").getAsString();
+        return ChemistryCraftRegistry.getJsonObjectByElementName(parent).get("color").getAsString();
     }
 
     public static List<MobEffectInstance> mobEffectsFactory(JsonObject object) {

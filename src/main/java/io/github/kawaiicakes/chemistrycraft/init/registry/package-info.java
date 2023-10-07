@@ -5,7 +5,7 @@
  */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package io.github.kawaiicakes.chemistrycraft.registry;
+package io.github.kawaiicakes.chemistrycraft.init.registry;
 
 import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
 import javax.annotation.ParametersAreNonnullByDefault;

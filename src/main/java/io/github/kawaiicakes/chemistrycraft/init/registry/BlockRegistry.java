@@ -1,6 +1,6 @@
-package io.github.kawaiicakes.chemistrycraft.registry;
+package io.github.kawaiicakes.chemistrycraft.init.registry;
 
-import io.github.kawaiicakes.chemistrycraft.registry.block.BloomeryBlock;
+import io.github.kawaiicakes.chemistrycraft.init.registry.block.BloomeryBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

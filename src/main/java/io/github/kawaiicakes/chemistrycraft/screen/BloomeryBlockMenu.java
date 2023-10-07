@@ -1,6 +1,6 @@
 package io.github.kawaiicakes.chemistrycraft.screen;
 
-import io.github.kawaiicakes.chemistrycraft.registry.block.entity.BloomeryBlockEntity;
+import io.github.kawaiicakes.chemistrycraft.init.registry.block.entity.BloomeryBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -11,8 +11,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-import static io.github.kawaiicakes.chemistrycraft.registry.BlockRegistry.BLOOMERY;
-import static io.github.kawaiicakes.chemistrycraft.registry.MenuRegistry.BLOOMERY_MENU;
+import static io.github.kawaiicakes.chemistrycraft.init.registry.BlockRegistry.BLOOMERY;
+import static io.github.kawaiicakes.chemistrycraft.init.registry.MenuRegistry.BLOOMERY_MENU;
 
 public class BloomeryBlockMenu extends AbstractContainerMenu {
     public final BloomeryBlockEntity entity;

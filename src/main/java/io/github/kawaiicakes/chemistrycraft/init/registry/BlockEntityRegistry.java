@@ -1,13 +1,13 @@
-package io.github.kawaiicakes.chemistrycraft.registry;
+package io.github.kawaiicakes.chemistrycraft.init.registry;
 
-import io.github.kawaiicakes.chemistrycraft.registry.block.entity.BloomeryBlockEntity;
+import io.github.kawaiicakes.chemistrycraft.init.registry.block.entity.BloomeryBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import static io.github.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID;
-import static io.github.kawaiicakes.chemistrycraft.registry.BlockRegistry.BLOOMERY;
+import static io.github.kawaiicakes.chemistrycraft.init.registry.BlockRegistry.BLOOMERY;
 
 public class BlockEntityRegistry {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_REGISTRY =

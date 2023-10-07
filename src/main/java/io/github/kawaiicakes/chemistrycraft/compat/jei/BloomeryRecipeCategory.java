@@ -1,7 +1,7 @@
 package io.github.kawaiicakes.chemistrycraft.compat.jei;
 
 import io.github.kawaiicakes.chemistrycraft.recipe.BloomeryRecipe;
-import io.github.kawaiicakes.chemistrycraft.registry.ItemRegistry;
+import io.github.kawaiicakes.chemistrycraft.init.registry.ItemRegistry;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;

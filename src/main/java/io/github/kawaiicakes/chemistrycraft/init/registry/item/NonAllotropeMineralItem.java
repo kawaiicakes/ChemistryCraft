@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.registry.item;
+package io.github.kawaiicakes.chemistrycraft.init.registry.item;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.smashingmods.chemlib.api.MatterState;
 import com.smashingmods.chemlib.common.items.CompoundItem;
 import io.github.kawaiicakes.chemistrycraft.api.Mineral;
+import io.github.kawaiicakes.chemistrycraft.init.registry.ChemistryCraftRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -23,7 +24,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 import static io.github.kawaiicakes.chemistrycraft.ChemistryCraft.MOD_ID_TEXT_STYLE;
-import static io.github.kawaiicakes.chemistrycraft.registry.ChemistryCraftRegistry.getJsonObjectByCompoundName;
 
 public class NonAllotropeMineralItem extends CompoundItem implements Mineral {
     private final String nonAllotropeName;
@@ -38,7 +38,7 @@ public class NonAllotropeMineralItem extends CompoundItem implements Mineral {
                 components(parentChemical),
                 description(parentChemical),
                 color(parentChemical),
-                mobEffectsFactory(getJsonObjectByCompoundName(parentChemical))
+                mobEffectsFactory(ChemistryCraftRegistry.getJsonObjectByCompoundName(parentChemical))
         );
         this.nonAllotropeName = nonAllotropeName;
         this.phase = phase;
@@ -82,19 +82,19 @@ public class NonAllotropeMineralItem extends CompoundItem implements Mineral {
     }
 
     public static String description(String parentChemical) {
-        return getJsonObjectByCompoundName(parentChemical).get("description").getAsString();
+        return ChemistryCraftRegistry.getJsonObjectByCompoundName(parentChemical).get("description").getAsString();
     }
 
     public static String abbreviation(String parentChemical) {
-        return getJsonObjectByCompoundName(parentChemical).get("abbreviation").getAsString();
+        return ChemistryCraftRegistry.getJsonObjectByCompoundName(parentChemical).get("abbreviation").getAsString();
     }
 
     public static String color(String parentChemical) {
-        return getJsonObjectByCompoundName(parentChemical).get("color").getAsString();
+        return ChemistryCraftRegistry.getJsonObjectByCompoundName(parentChemical).get("color").getAsString();
     }
 
     public static Map<String, Integer> components(String parentChemical) {
-        JsonArray components = getJsonObjectByCompoundName(parentChemical).getAsJsonArray("components");
+        JsonArray components = ChemistryCraftRegistry.getJsonObjectByCompoundName(parentChemical).getAsJsonArray("components");
 
         HashMap<String, Integer> componentMap = new LinkedHashMap<>();
         for (JsonElement component : components) {

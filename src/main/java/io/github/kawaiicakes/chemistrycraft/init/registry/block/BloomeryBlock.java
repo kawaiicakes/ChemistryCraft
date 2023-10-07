@@ -1,6 +1,7 @@
-package io.github.kawaiicakes.chemistrycraft.registry.block;
+package io.github.kawaiicakes.chemistrycraft.init.registry.block;
 
-import io.github.kawaiicakes.chemistrycraft.registry.block.entity.BloomeryBlockEntity;
+import io.github.kawaiicakes.chemistrycraft.init.registry.BlockEntityRegistry;
+import io.github.kawaiicakes.chemistrycraft.init.registry.block.entity.BloomeryBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -22,8 +23,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
-
-import static io.github.kawaiicakes.chemistrycraft.registry.BlockEntityRegistry.BLOOMERY_ENTITY;
 
 @SuppressWarnings("deprecation")
 public class BloomeryBlock extends BaseEntityBlock {
@@ -104,7 +103,7 @@ public class BloomeryBlock extends BaseEntityBlock {
     @Nullable
     @Override //    gets static ticking logic of block entity
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> tBlockEntityType) {
-        return createTickerHelper(tBlockEntityType, BLOOMERY_ENTITY.get(),
+        return createTickerHelper(tBlockEntityType, BlockEntityRegistry.BLOOMERY_ENTITY.get(),
                 BloomeryBlockEntity::tick);
     }
 }

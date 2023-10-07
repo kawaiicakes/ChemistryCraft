@@ -1,4 +1,4 @@
-package io.github.kawaiicakes.chemistrycraft.registry;
+package io.github.kawaiicakes.chemistrycraft.init.registry;
 
 import com.smashingmods.chemlib.registry.ItemRegistry;
 import net.minecraft.world.item.CreativeModeTab;
