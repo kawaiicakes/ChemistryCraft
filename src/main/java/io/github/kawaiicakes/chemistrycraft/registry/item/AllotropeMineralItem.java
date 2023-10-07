@@ -29,28 +29,28 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
 public class AllotropeMineralItem extends ElementItem implements Mineral {
-    private final String name;
+    private final String allotropeName;
     private final String phase;
     private final String description;
-    private final String parent;
+    private final String parentChemical;
 
-    public AllotropeMineralItem(String allotropeName, @Nullable String phase, String description, String parent) {
+    public AllotropeMineralItem(String allotropeName, @Nullable String phase, String description, String parentChemical) {
         super(
-                parent.toUpperCase(),
-                atomicNumber(parent),
-                abbreviation(parent),
-                group(parent),
-                period(parent),
+                parentChemical,
+                atomicNumber(parentChemical),
+                abbreviation(parentChemical),
+                group(parentChemical),
+                period(parentChemical),
                 MatterState.SOLID,
-                metalType(parent),
-                artificial(parent),
-                color(parent),
-                mobEffectsFactory(getJsonObjectByElementName(parent))
+                metalType(parentChemical),
+                artificial(parentChemical),
+                color(parentChemical),
+                mobEffectsFactory(getJsonObjectByElementName(parentChemical))
         );
-        this.name = allotropeName;
+        this.allotropeName = allotropeName;
         this.phase = phase;
         this.description = description;
-        this.parent = parent;
+        this.parentChemical = parentChemical;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class AllotropeMineralItem extends ElementItem implements Mineral {
 
     @Override
     public String getChemicalName() {
-        return this.name;
+        return this.allotropeName;
     }
 
     @Override
@@ -97,8 +97,8 @@ public class AllotropeMineralItem extends ElementItem implements Mineral {
     }
 
     @Override
-    public String getParent() {
-        return this.parent;
+    public String getParentChemical() {
+        return this.parentChemical;
     }
 
     public static JsonObject getJsonObjectByElementName(String pName) {

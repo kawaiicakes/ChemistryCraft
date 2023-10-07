@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 public interface Mineral extends Chemical {
     @Nullable
     String getPhase();
-    String getParent();
+    String getParentChemical();
 
     default MatterState getMatterState() {
         return MatterState.SOLID;
